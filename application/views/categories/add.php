@@ -3,13 +3,13 @@
 			?>
 			<ul class="breadcrumb">
 				<li><a href="<?php echo site_url() . "/dashboard";?>"><?php echo $this->lang->line('dashboard_label')?></a> <span class="divider"></span></li>
-				<li><a href="<?php echo site_url('categories');?>"><?php echo $this->lang->line('cat_list_label')?></a> <span class="divider"></span></li>
+				<li><a href="<?php echo site_url('dogs');?>"><?php echo $this->lang->line('cat_list_label')?></a> <span class="divider"></span></li>
 				<li><?php echo $this->lang->line('add_new_cat_button')?></li>
 			</ul>
 			
 			<?php
 				$attributes = array('id' => 'category-form','enctype' => 'multipart/form-data');
-				echo form_open(site_url('categories/add'), $attributes);
+				echo form_open(site_url('dogs/add'), $attributes);
 			?>
 				<div class="wrapper wrapper-content animated fadeInRight">
 				<legend><?php echo $this->lang->line('cat_info_lable')?></legend>
@@ -47,7 +47,7 @@
 				
 				<hr/>
 				<button type="submit" class="btn btn-primary"><?php echo $this->lang->line('save_button')?></button>
-				<a href="<?php echo site_url('categories');?>" class="btn btn-primary"><?php echo $this->lang->line('cancel_button')?></a>
+				<a href="<?php echo site_url('dogs');?>" class="btn btn-primary"><?php echo $this->lang->line('cancel_button')?></a>
 			</form>
 			</div>
 
@@ -58,7 +58,7 @@
 							name:{
 								required: true,
 								minlength: 3,
-								remote: '<?php echo site_url("categories/exists/" . $this->shop->get_current_shop()->id);?>'
+								remote: '<?php echo site_url("dogs/exists/" . $this->shop->get_current_shop()->id);?>'
 							}
 						},
 						messages:{

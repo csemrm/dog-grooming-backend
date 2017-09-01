@@ -3,14 +3,14 @@
 			?>
 			<ul class="breadcrumb">
 				<li><a href="<?php echo site_url() . "/dashboard";?>"><?php echo $this->lang->line('dashboard_label')?></a> <span class="divider"></span></li>
-				<li><a href="<?php echo site_url('categories');?>"><?php echo $this->lang->line('cat_list_label')?></a> <span class="divider"></span></li>
+				<li><a href="<?php echo site_url('dogs');?>"><?php echo $this->lang->line('cat_list_label')?></a> <span class="divider"></span></li>
 				<li><?php echo $this->lang->line('update_cat_label')?></li>
 			</ul>
 			
 			<div class="wrapper wrapper-content animated fadeInRight">
 			<?php
 			$attributes = array('id' => 'category-form');
-			echo form_open(site_url('categories/edit/'.$category->id), $attributes);
+			echo form_open(site_url('dogs/edit/'.$category->id), $attributes);
 			?>
 				
 				<div class="row">
@@ -75,7 +75,7 @@
 				<hr/>
 				
 				<button type="submit" class="btn btn-primary"><?php echo $this->lang->line('update_button')?></button>
-				<a href="<?php echo site_url('categories');?>" class="btn btn-primary"><?php echo $this->lang->line('cancel_button')?></a>
+				<a href="<?php echo site_url('dogs');?>" class="btn btn-primary"><?php echo $this->lang->line('cancel_button')?></a>
 			</form>
 			</div>
 			
@@ -90,7 +90,7 @@
 						</div>
 						<?php
 						$attributes = array('id' => 'upload-form','enctype' => 'multipart/form-data');
-						echo form_open(site_url("categories/upload/".$category->id), $attributes);
+						echo form_open(site_url("dogs/upload/".$category->id), $attributes);
 						?>
 							<div class="modal-body">
 								<div class="form-group">
@@ -132,7 +132,7 @@
 							name:{
 								required: true,
 								minlength: 4,
-								remote: '<?php echo site_url('categories/exists/'.$category->id);?>'
+								remote: '<?php echo site_url('dogs/exists/'.$category->id);?>'
 							}
 						},
 						messages:{
@@ -148,7 +148,7 @@
 						e.preventDefault();
 						var id = $(this).attr('id');
 						var image = $(this).attr('image');
-						var action = '<?php echo site_url('categories/delete_image/'.$category->id);?>/' + id + '/' + image;
+						var action = '<?php echo site_url('dogs/delete_image/'.$category->id);?>/' + id + '/' + image;
 						$('.btn-delete-image').attr('href', action);
 					});
 				});

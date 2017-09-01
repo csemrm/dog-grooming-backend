@@ -22,7 +22,7 @@
 				</li>
 				
 				<li>
-					<a href="<?php echo site_url("appointments/create") ?>">
+					<a href="<?php echo site_url("reservations/create") ?>">
 						Create New Appointment
 						<span class='fa fa-cutlery'></span>
 					</a>

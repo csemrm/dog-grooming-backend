@@ -44,100 +44,11 @@
 				$all_discounts_count = $this->discount_type->count_all($this->shop->get_current_shop()->id);
 			?>
 			<div class="row">
-		            <div class="col-lg-4"> 
-		            	<div class="ibox float-e-margins">
-		                    <div class="ibox-title">
-		                        <h5>Discount Information</h5>
-		                        <div class="ibox-tools">
-		                            <span class="label label-warning-light">Total : <?php echo $all_discounts_count; ?> Discounts</span>
-		                        </div>
-		                    </div>
-		                    <div class="ibox-content">
-		                        
-		                        <div>
-		                        	<?php 
-		                        		foreach($all_discounts->result() as $dis)
-		                        			echo '<h5>'.$dis->name.' <br/><small class="m-r">'.
-		                        				'<a href="'.site_url('discount_types').'">Check For Detail!</a></small></h5>';
-		                        	?>
-		                         </div>
-		                         
-		                    </div>
-		                </div>
 		            
-		                <div class="ibox float-e-margins">
-		                    <div class="ibox-title">
-		                    	<?php
-		                    		$all_inquiries = $this->inquiry->get_all($this->shop->get_current_shop()->id, 5);
-		                    		$all_inquiries_count = $this->inquiry->count_all($this->shop->get_current_shop()->id);
-		                    	?>
-		                        <h5>Inquiry Messages</h5>
-		                        <div class="ibox-tools">
-		                            <span class="label label-warning-light">Total : <?php echo $all_inquiries_count; ?> Messages</span>
-		                        </div>
-		                    </div>
-		                   
-		                    <div class="ibox-content">
-		                        <div class="feed-activity-list">
-									
-									<?php 
-										foreach($all_inquiries->result() as $inquiry)
-											echo "<div class='feed-element'><div>".
-													"<small class='pull-right text-navy'>".$this->inquiry->ago($inquiry->added)."</small>".
-													"<strong>".$inquiry->name."</strong>".
-													"<div><i class='glyphicon glyphicon-envelope'></i>    ".$this->feed->read_more_text($inquiry->message)."</div>".
-											     "</div></div>";
-									?>
-									
-		                        </div>
-		                        <small class="pull-right text-navy"><a href='<?php echo site_url('inquiries');?>'>View All</a></small>
-		                    </div>
-		                </div>
-		            </div>
 		        
 		            <div class="col-lg-8">
 		                <div class="row">
-		                    <div class="col-lg-6">
-		                        <div class="ibox float-e-margins">
-			                        <?php
-			                        	$all_items = $this->item->get_all($this->shop->get_current_shop()->id, 7);
-			                        	$all_items_count = $this->item->count_all($this->shop->get_current_shop()->id);
-			                         ?>
-		                            <div class="ibox-title">
-		                                <h5>Recent Items list</h5>
-		                                <div class="ibox-tools">
-		                                    <span class="label label-warning-light">Total : <?php echo $all_items_count;?> Items</span>
-		                                </div>
-		                            </div>
-		                            <div class="ibox-content">
-		                                <table class="table table-hover no-margins">
-		                                    <thead>
-		                                    <tr>
-		                                        <th>Name</th>
-		                                        <th>Category</th>
-		                                        <th>Sub Cat.</th>
-		                                        <th>Price</th>
-		                                    </tr>
-		                                    </thead>
-		                                    
-		                                    <tbody>
-		                                    
-		                                    <?php 
-		                                    	
-		                                    	foreach($all_items->result() as $item)
-		                                    		echo '<tr>'.
-		                                    			 '<td><small>'.$item->name.'</small></td>'.
-		                                    			 '<td><small>'.$this->category->get_info($item->cat_id)->name.'</small></td>'.
-		                                    			 '<td><small>'.$this->sub_category->get_info($item->sub_cat_id)->name.'</small></td>'.
-		                                    			 '<td><small>'.$item->unit_price.'</small></td>'.
-		                                    		     '</tr>';
-		                                    ?>
-		                                   </tbody>
-		                                </table>
-		                                <small class="pull-right text-navy"><a href='<?php echo site_url('items');?>'>View All</a></small>
-		                            </div>
-		                        </div>
-		                    </div>
+		                    
 		                    <div class="col-lg-6">
 		                        <div class="ibox float-e-margins">
 		                        	<?php

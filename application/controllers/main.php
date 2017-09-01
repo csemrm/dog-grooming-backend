@@ -54,7 +54,7 @@ class Main extends CI_Controller
 	
 	function get_current_shop()
 	{
-		return array('id'=>1);
+		return  (object) array('id'=>1);
 	}
 }
 ?>

@@ -1,10 +1,10 @@
 <?php
 require_once('main.php');
-class Categories extends Main
+class Dogs extends Main
 {
 	function __construct()
 	{
-		parent::__construct('categories');
+		parent::__construct('dogs');
 		$this->load->library('uploader');
 	}
 	
@@ -13,7 +13,7 @@ class Categories extends Main
 		$this->session->unset_userdata('searchterm');
 	
 		$pag = $this->config->item('pagination');
-		$pag['base_url'] = site_url('categories/index');
+		$pag['base_url'] = site_url('dogs/index');
 		$pag['total_rows'] = $this->category->count_all($this->get_current_shop()->id);
 		
 		$data['categories'] = $this->category->get_all($this->get_current_shop()->id, $pag['per_page'],$this->uri->segment(3));
@@ -59,7 +59,7 @@ class Categories extends Main
 					$this->session->set_flashdata('error','Database error occured.Please contact your system administrator.');
 				}
 				
-				redirect(site_url('categories'));
+				redirect(site_url('dogs'));
 			} else {
 				$data['error'] = $upload_data['error'];
 			}
@@ -76,7 +76,7 @@ class Categories extends Main
 		
 		$pag = $this->config->item('pagination');
 		
-		$pag['base_url'] = site_url('categories/search');
+		$pag['base_url'] = site_url('dogs/search');
 		$pag['total_rows'] = $this->category->count_all_by($this->get_current_shop()->id, array('searchterm'=>$search_term));
 		
 		$data['searchterm'] = $search_term;
@@ -125,7 +125,7 @@ class Categories extends Main
 			} else {
 				$this->session->set_flashdata('error','Database error occured.Please contact your system administrator.');
 			}
-			redirect(site_url('categories'));
+			redirect(site_url('dogs'));
 		}
 		
 		$data['category'] = $this->category->get_info($category_id);
@@ -185,7 +185,7 @@ class Categories extends Main
 		} else {
 			$this->session->set_flashdata('error','Database error occured.Please contact your system administrator.');
 		}
-		redirect(site_url('categories'));
+		redirect(site_url('dogs'));
 	}
 
 	function delete_items($category_id = 0)
@@ -211,7 +211,7 @@ class Categories extends Main
 		} else {
 			$this->session->set_flashdata('error','Database error occured in categories.Please contact your system administrator.');
 		}
-		redirect(site_url('categories'));
+		redirect(site_url('dogs'));
 	}
 	
 	function delete_sub_categories($category_id)
@@ -259,7 +259,7 @@ class Categories extends Main
 		} else {
 			$this->session->set_flashdata('error','Database error occured.Please contact your system administrator.');
 		}
-		redirect(site_url('categories/edit/' . $category_id));
+		redirect(site_url('dogs/edit/' . $category_id));
 	}
 	
 	function exists($shop_id=0)
@@ -298,7 +298,7 @@ class Categories extends Main
 					'height'=>$upload['image_height']
 				);
 				$this->image->save($image);
-				redirect(site_url('categories/edit/' . $category_id));
+				redirect(site_url('dogs/edit/' . $category_id));
 			}
 			
 		} else {

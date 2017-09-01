@@ -1,7 +1,7 @@
 <?php 
 require_once(APPPATH.'/libraries/REST_Controller.php');
 
-class Categories extends REST_Controller
+class Dogs extends REST_Controller
 {
 	function get_get()
 	{
@@ -11,13 +11,10 @@ class Categories extends REST_Controller
 
 		if ($id) {
 			$cat = $this->category->get_info($id);
-			$cat->items = $this->get_items($cat->id);
 			$data = $cat;
 		} else {
 			$cats = $this->category->get_only_publish()->result();
-			foreach ($cats as $cat) {
-				$cat->items = $this->get_items($cat->id);
-			}
+			
 			$data = $cats;
 		}
 		

@@ -11,18 +11,18 @@
 				<div class='col-sm-9'>
 					<?php
 					$attributes = array('class' => 'form-inline');
-					echo form_open(site_url('categories/search'), $attributes);
+					echo form_open(site_url('dogs/search'), $attributes);
 					?>
 						<div class="form-group">
 					   	<input type="text" name="searchterm" class="form-control" placeholder="Search"
 					   		value="<?php echo $searchterm;?>">
 					  	</div>
 					  	<button type="submit" class="btn btn-default"><?php echo $this->lang->line('search_button')?></button>
-					  	<a href='<?php echo site_url('categories');?>' class="btn btn-default"><?php echo $this->lang->line('reset_button')?></a>
+					  	<a href='<?php echo site_url('dogs');?>' class="btn btn-default"><?php echo $this->lang->line('reset_button')?></a>
 					</form>
 				</div>	
 				<div class='col-sm-3'>
-					<a href='<?php echo site_url('categories/add');?>' class='btn btn-primary pull-right'><span class='glyphicon glyphicon-plus'></span>
+					<a href='<?php echo site_url('dogs/add');?>' class='btn btn-primary pull-right'><span class='glyphicon glyphicon-plus'></span>
 					<?php echo $this->lang->line('add_new_cat_button')?></a>
 				</div>
 			</div>
@@ -82,16 +82,16 @@
 							<?php 
 								if(!$this->session->userdata('is_shop_admin')) { 
 									if(in_array('edit',$allowed_accesses)):?>
-										<td><a href='<?php echo site_url("categories/edit/".$category->id);?>'><i class='glyphicon glyphicon-edit'></i></a></td>
+										<td><a href='<?php echo site_url("dogs/edit/".$category->id);?>'><i class='glyphicon glyphicon-edit'></i></a></td>
 							<?php endif; } else { ?>
-										<td><a href='<?php echo site_url("categories/edit/".$category->id);?>'><i class='glyphicon glyphicon-edit'></i></a></td>
+										<td><a href='<?php echo site_url("dogs/edit/".$category->id);?>'><i class='glyphicon glyphicon-edit'></i></a></td>
 							<?php } ?>
 							<?php 
 								if(!$this->session->userdata('is_shop_admin')) {
 									if(in_array('delete',$allowed_accesses)):?>
-										<td><a href='<?php echo site_url("categories/delete/".$category->id);?>'><i class='glyphicon glyphicon-trash'></i></a></td>
+										<td><a href='<?php echo site_url("dogs/delete/".$category->id);?>'><i class='glyphicon glyphicon-trash'></i></a></td>
 							<?php endif; } else { ?>
-										<td><a href='<?php echo site_url("categories/delete/".$category->id);?>'><i class='glyphicon glyphicon-trash'></i></a></td>
+										<td><a href='<?php echo site_url("dogs/delete/".$category->id);?>'><i class='glyphicon glyphicon-trash'></i></a></td>
 							<?php } ?>
 							<?php 
 								if(!$this->session->userdata('is_shop_admin')) {
@@ -141,7 +141,7 @@
 					var btn = $(this);
 					var id = $(this).attr('catid');
 					$.ajax({
-						url: '<?php echo site_url('categories/publish');?>/'+id,
+						url: '<?php echo site_url('dogs/publish');?>/'+id,
 						method:'GET',
 						success:function(msg){
 							if(msg == 'true')
@@ -158,7 +158,7 @@
 					var btn = $(this);
 					var id = $(this).attr('catid');
 					$.ajax({
-						url: '<?php echo site_url('categories/unpublish');?>/'+id,
+						url: '<?php echo site_url('dogs/unpublish');?>/'+id,
 						method:'GET',
 						success:function(msg){
 							if(msg == 'true')

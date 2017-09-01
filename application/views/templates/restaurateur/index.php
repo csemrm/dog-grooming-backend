@@ -22,7 +22,7 @@
 		</div>
 		<div class="col-sm-9 col-sm-offset-3 col-md-offset-2 main teamps-sidebar-push col-md-10">
 		
-		<?php print_r($content[content]);?>
+		<?php print_r($content['content']);?>
 		
 		</div>
 	</div>

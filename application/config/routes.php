@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "reservations";
+$route['default_controller'] = "dashboard";
 $route['404_override'] = '';
 $route['login'] = 'moket/login';
 $route['logout'] = 'moket/logout';
