@@ -14,61 +14,7 @@
 			
 			<div class="wrapper wrapper-content animated fadeInRight">
 		 	<div class="row">
-		  		<div class="col-sm-3">
-		  			<a href="<?php  echo site_url('appusers') ?>">
-			  			<span class="badge badge-important">
-			  				<?php echo $this->appuser->count_all();?>
-			  			</span>
-			  			
-			  			<div class="hero-widget">
-			  				<div class="icon">
-			  					<i class="fa fa-group"></i>
-			  				</div>
-			  				<div class="text">
-			  					
-			  					<label class="text-muted">Registered User Counts</label>
-			  				</div>
-			  			</div>
-		  			</a>
-		  		</div>
-			  	<div class="col-sm-3">
-			  		<a href="<?php  echo site_url('reviews') ?>">
-			  		
-				  		<span class="badge badge-important">
-				  			<?php echo $this->review->count_all($this->shop->get_current_shop()->id);?>
-				  		</span>
-				  		
-				  		<div class="hero-widget">
-				  			<div class="icon">
-				  				<i class="fa fa-pencil-square"></i>
-				  			</div>
-				  			<div class="text">
-				  				<label class="text-muted">Item Review Counts</label>
-				  			</div>
-				  		</div>
-			  		
-			  		</a>
-			  	</div>
-			  	<div class="col-sm-3">
-			  		<a href="<?php  echo site_url('likes') ?>">
-			  		
-				  		<span class="badge badge-important">
-				  			<?php echo $this->like->count_all($this->shop->get_current_shop()->id);?>
-				  		</span>
-				  		
-				  		<div class="hero-widget">
-				  			
-				  			<div class="icon">
-				  				<i class="fa fa-thumbs-up"></i>
-				  			</div>
-				  			<div class="text">
-				  				
-				  				<label class="text-muted">Item Like Counts</label>
-				  			</div>
-				  		</div>
-			  		
-			  		</a>
-			  	</div>
+		  		
 			  	<div class="col-sm-3">
 			  		<a href="<?php  echo site_url('reservations') ?>">
 				  		
@@ -244,55 +190,7 @@
 		
 		                    </div>
 		                </div>
-		                <div class="row">
-		                    <div class="col-lg-12">
-		                        <div class="ibox float-e-margins">
-		                        	<?php
-		                        		$all_trans = $this->transaction_header->get_all_by($this->shop->get_current_shop()->id, 3);
-		                        		$all_trans_count = $this->transaction_header->count_all_by($this->shop->get_current_shop()->id);
-		                        	 ?>
-		                            <div class="ibox-title">
-		                                <h5>Latest Transactions</h5>
-		                                <div class="ibox-tools">
-		                                    <span class="label label-warning-light">Total : <?php echo $all_trans_count;?> Transactions</span>
-		                                </div>
-		                            </div>
-		                            <div class="ibox-content">
-		
-		                                <div class="row">
-		                                    <div class="col-lg-11">
-		                                        <table class="table table-hover margin bottom">
-		                                            <thead>
-		                                            <tr>
-		                                                <th style="width: 1%" class="text-center">ID.</th>
-		                                                <th>Payment Option</th>
-		                                                <th>Trans Status</th>
-		                                                <th class="text-center">Date</th>
-		                                                <th class="text-center">Amount</th>
-		                                            </tr>
-		                                            </thead>
-		                                            <tbody>
-		                                            <?php 
-		                                            	
-		                                            	foreach($all_trans->result() as $tran)
-		                                            		echo '<tr>'.
-			                                            			 '<td class="text-center">'.$tran->id.'</td>'.
-			                                            			 '<td>'.$tran->payment_method.'</td>'.
-			                                            			 '<td><span class="label label-primary">'.$this->transaction_status->get_info($tran->transaction_status)->title.'</span></td>'.
-			                                            			 '<td class="text-center small">'.$this->inquiry->ago($tran->added).'</td>'.
-			                                            			 '<td class="text-center"><span class="label label-primary">'.$this->shop->get_current_shop()->currency_symbol.$tran->total_amount.'</span></td>'.
-		                                            		     '</tr>';
-		                                            ?>
-		                                           
-		                                            </tbody>
-		                                        </table>
-		                                    </div>
-		                                    
-		                            </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
+		                 
 		
 		            </div>
 		

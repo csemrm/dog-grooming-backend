@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "shops";
+$route['default_controller'] = "reservations";
 $route['404_override'] = '';
 $route['login'] = 'moket/login';
 $route['logout'] = 'moket/logout';
@@ -46,6 +46,7 @@ $route['profile'] = 'dashboard/profile';
 $route['reset/(:any)'] = 'moket/reset/$1';
 $route['forgot'] = 'moket/forgot';
 $route['backup'] = 'dashboard/backup';
+$route['appointments'] = 'reservations';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -12,53 +12,22 @@
 		
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
+				
+				 
 				<li>
-					<?php 
-						if ($this->session->userdata('shop_id') != "") {
-							if ($mode) {
-					?>
-								<a href="<?php echo site_url("dashboard") ?>">
-										<?php echo "Dashboard";?>
-										<span class='fa fa-dashboard'></span>
-								</a>
-					<?php
-							} else {
-					?>
-								<a  href="<?php echo site_url("shops/edit/" . $this->shop->get_current_shop()->id) ?>">
-										<?php echo $this->shop->get_current_shop()->name;?>
-										<span class='fa fa-edit'></span>
-								</a>
-					<?php
-							}
-						}
-					?>
-				</li>
-				<?php 
-					if(!$this->session->userdata('is_shop_admin')) {
-				?>
-				<li>
-					<a href="<?php echo site_url("shops") ?>">
-						Switch Shops
+					<a href="<?php echo site_url() ?>">
+						Home
 						<span class='fa fa-exchange'></span>
 					</a>
 				</li>
 				
 				<li>
-					<a href="<?php echo site_url("shops/create") ?>">
-						Create New Restaurant
+					<a href="<?php echo site_url("appointments/create") ?>">
+						Create New Appointment
 						<span class='fa fa-cutlery'></span>
 					</a>
-				</li>
-				
-				<?php } ?>
-				<!--
-				<li>
-					<a href="<?php echo site_url("currencies") ?>">
-						Currency Update
-						<span class='glyphicon glyphicon-cog menu-icon'></span>
-					</a>
-				</li>
-				-->
+				</li> 
+				 
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">

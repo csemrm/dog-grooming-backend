@@ -7,12 +7,15 @@ class Dashboard extends Main
 	{
 		parent::__construct();
 	}	
-	
-	function index($shop_id = 0)
+	/*
+         * set default shop id is 1
+         */
+	function index($shop_id = 1)
 	{
 		if($this->session->userdata('is_owner') == 1) {
 			if ($shop_id) {
-				$this->session->set_userdata('shop_id', $shop_id);
+                            
+				$this->session->set_userdata('shop_id', 1);
 				$this->session->set_userdata('action', 'shop_list');
 			}
 			

@@ -305,5 +305,15 @@ $lang['shop_lng_label']                = "Longitude";
 $lang['shop_lng_tooltips']             = "Please provide shop longitude information.";
 
 
+$lang['branding_label']                = "Branding";
+$lang['branding_info_label']           = "Branding Information.";
+$lang['company_name_label']                  = "Company Name";
+$lang['slugon_label']                        = "Slugon.";
+$lang['compnay_logo_label']                  = "Compnay Logo";
+$lang['contact_email_label']                 = "Contact Email.";
+$lang['about_us_label']                      = "About Us";
+$lang['contact_address_label']               = "Contact Address.";
+
+
 /* End of file ps_lang.php */
 /* Location: ./system/language/english/ps_lang.php */

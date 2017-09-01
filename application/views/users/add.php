@@ -45,15 +45,7 @@
 									</select>
 								</div>
 								<hr>
-								<div class="form-group">
-									<label><?php echo $this->lang->line('select_shop_label')?></label> <br>
-									<select class="form-control" name='shop_id' id='shop_id'>
-										<?php
-											foreach($this->shop->get_all()->result() as $shop)
-												echo "<option value='".$shop->id."'>".$shop->name."</option>";
-										?>
-									</select>
-								</div>
+								
 								
 								
 						</div>

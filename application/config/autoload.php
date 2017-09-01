@@ -138,7 +138,8 @@ $autoload['model'] = array(
 	'transaction_status',
 	'reservation',
 	'reservation_status',
-	'coupon'
+	'coupon',
+    'branding'
 );
 
 
