@@ -7,16 +7,12 @@ class Dogs extends REST_Controller
 	{
 		$data = null;
 		
-		$id = $this->get('id');
+		 $appuser_id = $this->get('appuser_id');
 
-		if ($id) {
-			$cat = $this->category->get_info($id);
+		if ($appuser_id) {
+			$cat = $this->category->get_all_by($appuser_id)->result();
 			$data = $cat;
-		} else {
-			$cats = $this->category->get_only_publish()->result();
-			
-			$data = $cats;
-		}
+		}  
 		
 		$this->response($data);
 	}
@@ -44,95 +40,11 @@ class Dogs extends REST_Controller
 		}
 		
 		$i = 0;
-		foreach ($items as $item) {
-			$items[$i]->images = $this->image->get_all_by_item($item->id)->result();
-			$items[$i]->like_count = $this->like->count_all($item->id);
-			$items[$i]->unlike_count = $this->unlike->count_all($item->id);
-			$items[$i]->review_count = $this->review->count_all($item->id);
-			$items[$i]->inquiries_count = $this->inquiry->count_all($item->id);
-			$items[$i]->touches_count = $this->touch->count_all($item->id);
-			
-			$reviews = array();
-			$j = 0;
-			foreach ($this->review->get_all_by_item_id($item->id)->result() as $review) {
-				$reviews[$j] = $review;
-				$reviews[$j]->added = $this->ago($reviews[$j]->added);
-				$appuser = $this->appuser->get_info($review->appuser_id);
-				$reviews[$j]->appuser_name = $appuser->username;
-				$reviews[$j++]->profile_photo = $appuser->profile_photo;
-			}
-			
-			$attributes = array();
-			$k = 0;
-			
-			$attributes_detail = array();
-			$l = 0;
-			
-			foreach ($this->attribute_header->get_all_by_item_id($item->id)->result() as $header) {
-				$attributes[$k] = $header;
-				
-				foreach ($this->attribute_detail->get_all_by_header($attributes[$k]->id,$attributes[$k]->shop_id)->result() as $detail) {
-					$attributes_detail[$l++] = $detail;
-				}
-				$attributes[$k]->details = $attributes_detail;
-				$k++;
-				
-			}
-			
-			$items[$i]->reviews = $reviews;
-			$items[$i]->attributes = $attributes;
-			$i++;
-		}
+		
 		
 		return $items;
 	}
-	
-	function get_subcategories_get()
-	{
-		$cat_id = $this->get('cat_id');
-		$shop_id = $this->get('shop_id');
-		
-		$count = $this->get('count');
-		$from = $this->get('from');
-		
-		if (!$cat_id) {
-			$this->response(array('error' => array('message' => 'require_category_id')));
-		}
-		
-		if (!$shop_id) {
-			$this->response(array('error' => array('message' => 'require_shop_id')));
-		}
-		
-		
-		$this->response($this->get_sub_categories($shop_id, $cat_id,$count,$from));
-		
-	}
-	
-	function get_sub_categories($shop_id, $cat_id,$count,$from)
-	{
-		
-		
-		if ($count && $from) {
-			$sub_cats = $this->sub_category->get_all_by_cat_id($cat_id,"id","asc",$count, $from)->result();
-		} else if ($count) { 
-			$sub_cats = $this->sub_category->get_all_by_cat_id($cat_id,"id","asc",$count)->result();
-		} else {
-			$sub_cats = $this->sub_category->get_all_by_cat_id($cat_id,"id","asc")->result();
-		}
-		
-		
-		
-		
-		foreach ($sub_cats as $sub_cat) {
-			//$sub_cat->items = $this->get_items($shop_id, $sub_cat->id);
-			$sub_cat->cover_image_file   = $this->image->get_cover_image($sub_cat->id,'sub_category')->path;
-			$sub_cat->cover_image_width  = $this->image->get_cover_image($sub_cat->id,'sub_category')->width;
-			$sub_cat->cover_image_height = $this->image->get_cover_image($sub_cat->id,'sub_category')->height;
-		}
-		
-		
-		return $sub_cats;
-	}
+	  
 	
 	function ago($time)
 	{

@@ -16,14 +16,28 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<legend><?php echo $this->lang->line('cat_info_lable')?></legend>
-						
+						<div class="form-group">
+                <label><?php echo $this->lang->line('username_label') ?></label> <br>
+                <select class="form-control" name='appuser_id' id='appuser_id'>
+                    <?php
+                    $selected = '';
+                    foreach ($this->appuser->get_all()->result() as $appuser){
+                    if($appuser->id ==$category->appuser_id){
+                         echo "<option value='" . $appuser->id . "' selected>" . $appuser->username . "</option>";
+                    }else
+                        echo "<option value='" . $appuser->id . "'>" . $appuser->username . "</option>";
+                    
+                    }
+                    ?>
+                </select>
+            </div>
 						<div class="form-group">
 							<label><?php echo $this->lang->line('category_name_label')?>
 								<a href="#" class="tooltip-ps" data-toggle="tooltip" title="<?php echo $this->lang->line('cat_name_tooltips')?>">
 									<span class='glyphicon glyphicon-info-sign menu-icon'>
 								</a>
 							</label>
-							<input class="form-control" type="text" placeholder="Category Name" name='name' id='name' value='<?php echo $category->name;?>'>
+							<input class="form-control" type="text" placeholder="Dog Name" name='name' id='name' value='<?php echo $category->name;?>'>
 						</div>
 						<div class="form-group">
 							<label><?php echo $this->lang->line('ordering_label')?>
@@ -132,14 +146,14 @@
 							name:{
 								required: true,
 								minlength: 4,
-								remote: '<?php echo site_url('dogs/exists/'.$category->id);?>'
+								//remote: '<?php echo site_url('dogs/exists/'.$category->id);?>'
 							}
 						},
 						messages:{
 							name:{
-								required: "Please fill category name.",
-								minlength: "The length of category name must be greater than 4",
-								remote: "Category name is already existed in the system"
+								required: "Please fill dog name.",
+								minlength: "The length of dog name must be greater than 4",
+								//remote: "dog name is already existed in the system"
 							}
 						}
 					});
