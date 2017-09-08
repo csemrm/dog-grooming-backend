@@ -11,16 +11,11 @@ class Feed extends Base_Model
 
 	function exists($data)
 	{
-		$this->db->from($this->table_name);
-		$this->db->where('shop_id', $shop_id);
+		$this->db->from($this->table_name); 
 		
 		if (isset($data['id'])) {
 			$this->db->where('id', $data['id']);
-		}
-		
-		if (isset($data['shop_id'])) {
-			$this->db->where('shop_id', $data['shop_id']);
-		}
+		} 
 		
 		$query = $this->db->get();
 		return ($query->num_rows() >= 1);
@@ -28,7 +23,7 @@ class Feed extends Base_Model
 
 	function save(&$data, $id=false)
 	{
-		if (!$id && !$this->exists(array('id' => $id, 'shop_id' => $data['shop_id']))) {
+		if (!$id) {
 			if ($this->db->insert($this->table_name, $data)) {
 				$data['id'] = $this->db->insert_id();
 				return true;
@@ -40,10 +35,9 @@ class Feed extends Base_Model
 		return false;
 	}
 
-	function get_all($shop_id, $limit=false, $offset=false, $order_field = 'added', $order_type = 'desc')
+	function get_all($limit=false, $offset=false, $order_field = 'added', $order_type = 'desc')
 	{
-		$this->db->from($this->table_name);
-		$this->db->where('shop_id', $shop_id);
+		$this->db->from($this->table_name); 
 		
 		if ($limit) {
 			$this->db->limit($limit);
@@ -75,17 +69,15 @@ class Feed extends Base_Model
 		return $this->db->get();
 	}
 
-	function count_all($shop_id)
+	function count_all()
 	{
-		$this->db->from($this->table_name);
-		$this->db->where('shop_id', $shop_id);
+		$this->db->from($this->table_name); 
 		return $this->db->count_all_results();
 	}
 	
-	function count_all_by($shop_id, $conditions=array())
+	function count_all_by( $conditions=array())
 	{
-		$this->db->from($this->table_name);
-		$this->db->where('shop_id', $shop_id);
+		$this->db->from($this->table_name); 
 		
 		if (isset($conditions['searchterm']) && trim($conditions['searchterm']) != "") {
 			$this->db->where("(
@@ -96,10 +88,9 @@ class Feed extends Base_Model
 		return $this->db->count_all_results();
 	}
 	
-	function get_all_by($shop_id, $conditions=array(), $limit=false, $offset=false)
+	function get_all_by( $conditions=array(), $limit=false, $offset=false)
 	{
 		$this->db->from($this->table_name);
-		$this->db->where('shop_id', $shop_id);
 		
 		if (isset($conditions['searchterm']) && trim($conditions['searchterm']) != "") {
 			$this->db->where("(
@@ -126,9 +117,8 @@ class Feed extends Base_Model
 		return $this->db->delete($this->table_name);
 	}
 	
-	function delete_by_shop($shop_id)
+	function delete_by_shop()
 	{
-		$this->db->where('shop_id', $shop_id);
 		return $this->db->delete($this->table_name);
 	}
 	

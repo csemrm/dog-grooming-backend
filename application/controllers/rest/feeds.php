@@ -8,24 +8,18 @@ class Feeds extends REST_Controller
 		parent::__construct();	
 	}
 	
-	function index_get()
-	{
-		echo "adadadadadadadasd";die;
-		$shop_id = $this->get('shop_id');
-		if (!$shop_id) {
-			$this->response(array('error' => array('message' => 'require_shop_id')));
-		}
-	
+	function index_get() 
+        {
 		$count = $this->get('count');
 		$from = $this->get('from');
 	
 		$feeds = array();
 		if ($count && $from) {
-			$feeds = $this->feed->get_all($shop_id, $count, $from)->result();
+			$feeds = $this->feed->get_all( $count, $from)->result();
 		} else if ($count) {
-			$feeds = $this->feed->get_all($shop_id, $count)->result();
+			$feeds = $this->feed->get_all( $count)->result();
 		} else {
-			$feeds = $this->feed->get_all($shop_id)->result();
+			$feeds = $this->feed->get_all()->result();
 		}
 		
 		$data = array();
