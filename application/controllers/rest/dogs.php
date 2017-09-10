@@ -23,6 +23,7 @@ class Dogs extends REST_Controller {
 
     function add_post() {
         $data = $this->post();
+        $this->load->library('uploader');
 
         if ($data == null) {
             $this->response(array('error' => true, 'message' => 'invalid_json'));
@@ -54,6 +55,18 @@ class Dogs extends REST_Controller {
             $this->response(array('error' => true, 'message' => 'email_exist'));
         } else {
             $this->category->save($user_data);
+            $upload_data = $this->uploader->upload($_FILES);
+            foreach ($upload_data as $upload) {
+                $image = array(
+                    'parent_id' => $user_data['id'],
+                    'type' => 'category',
+                    'description' => "",
+                    'path' => $upload['file_name'],
+                    'width' => $upload['image_width'],
+                    'height' => $upload['image_height']
+                );
+                $this->image->save($image);
+            }
             $this->response(array('error' => false, 'user' => $user_data));
         }
     }
