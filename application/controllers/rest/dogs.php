@@ -21,6 +21,43 @@ class Dogs extends REST_Controller {
         $this->response(array('dogs' => $data, 'success' => true));
     }
 
+    function add_post() {
+        $data = $this->post();
+
+        if ($data == null) {
+            $this->response(array('error' => true, 'message' => 'invalid_json'));
+        }
+
+        if (!array_key_exists('name', $data)) {
+            $this->response(array('error' => true, 'message' => 'require name'));
+        }
+
+        if (!array_key_exists('type', $data)) {
+            $this->response(array('error' => true, 'message' => 'require type'));
+        }
+
+        if (!array_key_exists('appuser_id', $data)) {
+            $this->response(array('error' => true, 'message' => 'require appuser_id'));
+        }
+
+        $user_data = array(
+            'name' => $data['petname'],
+            'weight' => $data['weight'],
+            'type' => $data['animaltype'],
+            'gender' => $data['gender'],
+            ' weight' => $data['weight'],
+            'bread' => $data['bread'],
+            'appuser_id' => $data['appuser_id']
+        );
+
+        if ($this->category->exists($user_data)) {
+            $this->response(array('error' => true, 'message' => 'email_exist'));
+        } else {
+            $this->category->save($user_data);
+            $this->response(array('error' => false, 'user' => $user_data));
+        }
+    }
+
     function get_items($cat_id) {
         $all = $this->get('item');
         $count = $this->get('count');

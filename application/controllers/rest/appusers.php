@@ -82,28 +82,35 @@ class Appusers extends REST_Controller {
         }
 
         if (!array_key_exists('username', $data)) {
-            $this->response(array('error' => array('message' => 'require_username')));
+            $this->response(array('error' => true, 'message' => 'require name'));
         }
 
         if (!array_key_exists('email', $data)) {
-            $this->response(array('error' => array('message' => 'require_email')));
+            $this->response(array('error' => true, 'message' => 'require email address'));
         }
 
         if (!array_key_exists('password', $data)) {
-            $this->response(array('error' => array('message' => 'require_password')));
+            $this->response(array('error' => true, 'message' => 'require password'));
         }
 
         $user_data = array(
             'username' => $data['username'],
             'password' => md5($data['password']),
-            'email' => $data['email']
+            'email' => $data['email'],
+            "phone" => $data['phone'],
+            "dob" => $data['dob'],
+            "gender" => $data['gender'],
+            "address" => $data['address'],
+            "city" => $data['city'],
+            "state" => $data['state'],
+            "subscribe" => $data['subscribe']
         );
 
         if ($this->appuser->exists($user_data)) {
-            $this->response(array('error' => array('message' => 'email_exist')));
+            $this->response(array('error' => true, 'message' => 'email_exist'));
         } else {
             $this->appuser->save($user_data);
-            $this->response(array('user_id' => $user_data['id']));
+            $this->response(array('error' => false, 'user' => $user_data));
         }
     }
 

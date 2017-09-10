@@ -26,8 +26,9 @@ class Feeds extends REST_Controller
 		foreach ($feeds as $feed) {
 			$this->get_feed_images($feed);
 			$data[] = $feed;
-		}
-		$this->response($data);
+		} 
+                
+                $this->response(array('promos' => $data, 'success' => true));
 	}
 	
 	function get_feed_images(&$feed)

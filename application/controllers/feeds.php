@@ -14,9 +14,9 @@ class Feeds extends Main
 		
 		$pag = $this->config->item('pagination');
 		$pag['base_url'] = site_url('feeds/index');
-		$pag['total_rows'] = $this->feed->count_all(1);
+		$pag['total_rows'] = $this->feed->count_all();
 		
-		$data['feeds'] = $this->feed->get_all(1, $pag['per_page'], $this->uri->segment(3));
+		$data['feeds'] = $this->feed->get_all( $pag['per_page'], $this->uri->segment(3));
 		$data['pag'] = $pag;
 		
 		$content['content'] = $this->load->view('feeds/list',$data,true);		
