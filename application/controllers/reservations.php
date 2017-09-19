@@ -13,11 +13,10 @@ class Reservations extends Main {
         ));
     }
 
-	function index()
-	{
-		$shop_id = $this->get_current_shop()->id;
-        $data['reservations'] = $this->reservation->get_all_by($shop_id)->result();
-		$content['content'] = $this->load->view('reservations/calendarView',$data,true);		
+    function index() {
+        $shop_id = $this->get_current_shop()->id;
+        $data['reservations'] = $this->reservation->get_all_by(1)->result();
+        $content['content'] = $this->load->view('reservations/calendarView', $data, true);
         $this->load_template($content);
     }
 
@@ -29,7 +28,7 @@ class Reservations extends Main {
 
             if ($this->input->post('user_id') && $this->input->post('note')) {
                 $appuser = $this->appuser->get_info($this->input->post('user_id'));
-                
+
                 $note = $this->input->post('note');
                 $reserve_data = array(
                     'resv_date' => $this->input->post('resv_date'),
@@ -44,12 +43,12 @@ class Reservations extends Main {
                     'user_name' => $appuser->username,
                     'status_id' => 1
                 );
-                
+
                 if ($this->reservation->save($reserve_data)) {
                     $this->session->set_flashdata('success', 'Reservation is successfully updated.');
 
-                   // $this->send_email_to_user(
-                   //         $this->input->post('resv_user_id_hidden'), $this->input->post('resv_user_email_hidden'), $this->input->post('resv_user_name_hidden'), $this->input->post('resv_user_phone_hidden'), $this->input->post('resv_shop_id_hidden'), $this->input->post('resv_id_hidden'), $this->input->post('resv_date_hidden'), $this->input->post('resv_time_hidden'), $this->input->post('resv_note_hidden'), $this->reservation_status->get_info($this->input->post('resv_status'))->title);
+                    // $this->send_email_to_user(
+                    //         $this->input->post('resv_user_id_hidden'), $this->input->post('resv_user_email_hidden'), $this->input->post('resv_user_name_hidden'), $this->input->post('resv_user_phone_hidden'), $this->input->post('resv_shop_id_hidden'), $this->input->post('resv_id_hidden'), $this->input->post('resv_date_hidden'), $this->input->post('resv_time_hidden'), $this->input->post('resv_note_hidden'), $this->reservation_status->get_info($this->input->post('resv_status'))->title);
                 } else {
                     $this->session->set_flashdata('error', 'Database error occured.Please contact your system administrator.');
                 }
@@ -86,8 +85,6 @@ class Reservations extends Main {
                     $this->session->set_flashdata('error', 'Database error occured.Please contact your system administrator.');
                 }
                 redirect(site_url('reservations'));
-				
-			
             } else {
                 redirect(site_url('reservations'));
             }

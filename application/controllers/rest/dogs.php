@@ -42,11 +42,11 @@ class Dogs extends REST_Controller {
         }
 
         $user_data = array(
-            'name' => $data['petname'],
-            'weight' => $data['weight'],
-            'type' => $data['animaltype'],
+            'name' => $data['name'],
+            'is_published' => 1,
+            'type' => $data['type'],
             'gender' => $data['gender'],
-            ' weight' => $data['weight'],
+            'weight' => $data['weight'],
             'bread' => $data['bread'],
             'appuser_id' => $data['appuser_id']
         );
