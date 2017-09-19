@@ -1,92 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+<html lang="en" >
+    <!-- begin::Head -->
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            <?php
+            $this->lang->load('ps', 'english');
+            echo $this->lang->line('site_title');
+            ?>
+        </title>
+        <meta name="description" content="Latest updates and statistic charts">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!--begin::Web font -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+        <script>
+            WebFont.load({
+                google: {"families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]},
+                active: function () {
+                    sessionStorage.fonts = true;
+                }
+            });
+        </script>
+        <!--end::Web font -->
+        <!--begin::Base Styles -->
+        <link href="<?php echo base_url('/theme/assets/vendors/base/vendors.bundle.css'); ?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url('/theme/assets/demo/default/base/style.bundle.css'); ?>" rel="stylesheet" type="text/css" />
+        <!--end::Base Styles -->
+        <link rel="shortcut icon" href="<?php echo base_url('/theme/assets/demo/default/media/img/logo/favicon.ico'); ?>" />
+    </head>
+    <!-- end::Head -->
+    <!-- end::Body -->
+    <body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+        <!-- begin:: Page -->
+        <div class="m-grid m-grid--hor m-grid--root m-page">
+            <div class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--singin m-login--2 m-login-2--skin-1" id="m_login" style="background-image: url(<?php echo base_url('/theme/assets/app/media/img/bg/bg-1.jpg'); ?>) ">
+                <div class="m-grid__item m-grid__item--fluid	m-login__wrapper">
+                    <div class="m-login__container">
+                        <div class="m-login__logo">
+                            <a href="#">
+                                <img src="<?php echo base_url('/theme/assets/app/media/img/logos/logo-1.png'); ?>">
+                            </a>
+                        </div>
+                        <div class="m-login__signin">
+                            <div class="m-login__head">
+                                <h3 class="m-login__title">
+                                    Sign In To Admin
+                                </h3>
+                            </div>
+                            <?php
+                            $attributes = array('id' => 'login-form', 'class' => "m-login__form m-form", 'method' => 'POST');
+                            echo form_open(site_url('login'), $attributes);
+                            ?>
+                            <div class="form-group m-form__group">
+                                <input class="form-control m-input"   type="text" placeholder="Email" name="user_name" autocomplete="off">
+                            </div>
+                            <div class="form-group m-form__group">
+                                <input class="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="user_pass">
+                            </div>
+                            <div class="row m-login__form-sub">
+                                <div class="col m--align-left m-login__form-left">
+                                    <label class="m-checkbox  m-checkbox--light">
+                                        <input type="checkbox" name="remember">
+                                        Remember me
+                                        <span></span>
+                                    </label>  
+                                    <?php if ($this->session->flashdata('success')): ?>
+                                        <div class='alert alert-success fade in'>
+                                            <?php echo $this->session->flashdata('success'); ?>
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        </div>
+                                    <?php elseif ($this->session->flashdata('error')): ?>
+                                        <div class='alert alert-danger fade in'>
+                                            <?php echo $this->session->flashdata('error'); ?>
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="m-login__form-action">
+                                <button id="" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
+                                    Sign In
+                                </button>
+                            </div>
+                            <?php echo form_close(); ?>
+                        </div>
 
-    <title>
-    	<?php
-    		$this->lang->load('ps', 'english');
-    		echo $this->lang->line('site_title');
-    	?>
-    </title>
+                        <div class="m-login__forget-password">
+                            <div class="m-login__head">
+                                <h3 class="m-login__title">
+                                    Forgotten Password ?
+                                </h3>
+                                <div class="m-login__desc">
+                                    Enter your email to reset your password:
+                                </div>
+                            </div>
+                            <form class="m-login__form m-form" action="">
+                                <div class="form-group m-form__group">
+                                    <input class="form-control m-input" type="text" placeholder="Email" name="email" id="m_email" autocomplete="off">
+                                </div>
+                                <div class="m-login__form-action">
+                                    <button id="m_login_forget_password_submit" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                                        Request
+                                    </button>
+                                    &nbsp;&nbsp;
+                                    <button id="m_login_forget_password_cancel" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
 
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url('css/bootstrap.min.css');?>" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-	 <link href="<?php echo base_url('fonts/ptsan/stylesheet.css');?>" rel="stylesheet">
-    <link href="<?php echo base_url('css/dashboard.css');?>" rel="stylesheet">
-    
-    
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?php echo base_url('js/jquery.js');?>"></script>
-    <script src="<?php echo base_url('js/bootstrap.min.js');?>"></script>
-    <script src="<?php echo base_url('js/dashboard.js');?>"></script>
-    <script src="<?php echo base_url('js/jquery.validate.js');?>"></script>
-	</head>
-
-  	<body style="background: none repeat scroll 0% 0% rgb(81, 114, 138);">
-		<div class='fluid-container'>
-			<div class='row'>
-				<div class='col-sm-4 col-sm-offset-4'>
-
-	        		<?php
-	        		$attributes = array('id' => 'login-form','method' => 'POST');
-	        		echo form_open(site_url('login'), $attributes);
-	        		?>
-
-						<h2>
-						<label class="login-title">
-						Restaurateur
-						</label>
-						</h2>
-						<hr/>
-						<?php if($this->session->flashdata('success')):?>
-							<div class='alert alert-success fade in'>
-								<?php echo $this->session->flashdata('success');?>
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							</div>
-						<?php elseif($this->session->flashdata('error')):?>
-							<div class='alert alert-danger fade in'>
-								<?php echo $this->session->flashdata('error');?>
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							</div>							
-						<?php endif;?>
-						
-						<div class="form-group">
-							<label><font color="#fff">Username</font></label>
-							<input class="form-control" type="text" id="inputEmail" placeholder="Username" name='user_name'>
-						</div>
-						
-						<div class="form-group">
-							<label><font color="#fff">Password</font></label>
-							<input class="form-control" type="password" id="inputPassword" placeholder="Password" name='user_pass'>
-						</div>
-						
-						<button class="btn btn-primary" type="submit">Sign in</button>
-										
-					<?php echo form_close();  ?>
-			</div>
-		</div>
-	</div>
-	<script>
-		$(document).ready(function(){
-			$('#login-form').validate({
-				rules:{
-					user_name: "required",
-					user_pass: "required"
-				},
-				messages:{
-					user_name: "Please fill username.",
-					user_pass: "Please fill password"
-				}
-			});
-		});
-	</script>
-  </body>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end:: Page -->
+        <!--begin::Base Scripts -->
+        <script src="<?php echo base_url('/theme/assets/vendors/base/vendors.bundle.js'); ?>" type="text/javascript"></script>
+        <script src="<?php echo base_url('/theme/assets/demo/default/base/scripts.bundle.js'); ?>" type="text/javascript"></script>
+        <!--end::Base Scripts -->
+        <!--begin::Page Snippets -->
+        <script src="<?php echo base_url('/theme/assets/snippets/pages/user/login.js'); ?>" type="text/javascript"></script>
+        <!--end::Page Snippets -->
+    </body>
+    <!-- end::Body -->
 </html>

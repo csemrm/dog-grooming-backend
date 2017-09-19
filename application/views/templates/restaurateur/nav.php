@@ -69,10 +69,13 @@
                                                 </div>
                                                 <div class="m-card-user__details">
                                                     <span class="m-card-user__name m--font-weight-500">
-                                                        Mark Andre
+                                                        <div class="col-md-7">
+                                                            <?php $logged_in_user = $this->user->get_logged_in_user_info(); ?>
+                                                            <?php echo $logged_in_user->user_name; ?>  
+                                                        </div> 
                                                     </span>
-                                                    <a href="" class="m-card-user__email m--font-weight-300 m-link">
-                                                        mark.andre@gmail.com
+                                                    <a href="<?php echo site_url('profile'); ?>" class="m-card-user__email m--font-weight-300 m-link">
+                                                        <?php echo $logged_in_user->user_email; ?>  
                                                     </a>
                                                 </div>
                                             </div>
@@ -86,18 +89,14 @@
                                                         </span>
                                                     </li>
                                                     <li class="m-nav__item">
-                                                        <a href="header/profile.html" class="m-nav__link">
+                                                        <a href="<?php echo site_url('profile'); ?>" class="m-nav__link">
                                                             <i class="m-nav__link-icon flaticon-profile-1"></i>
                                                             <span class="m-nav__link-title">
                                                                 <span class="m-nav__link-wrap">
                                                                     <span class="m-nav__link-text">
                                                                         My Profile
                                                                     </span>
-                                                                    <span class="m-nav__link-badge">
-                                                                        <span class="m-badge m-badge--success">
-                                                                            2
-                                                                        </span>
-                                                                    </span>
+
                                                                 </span>
                                                             </span>
                                                         </a>
@@ -106,7 +105,7 @@
 
                                                     <li class="m-nav__separator m-nav__separator--fit"></li>
                                                     <li class="m-nav__item">
-                                                        <a href="snippets/pages/user/login-1.html" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                                                        <a href="<?php echo site_url('logout');?>" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
                                                             Logout
                                                         </a>
                                                     </li>
