@@ -13,8 +13,8 @@
 | path to your installation.
 |
 */
-$config['sender_email']	= 'no_reply@restaurateur.com';
-$config['sender_name'] = 'Restaurateur';
+$config['sender_email']	= 'no_reply@DogGrooming.com';
+$config['sender_name'] = 'Dog Grooming';
 
 $config['pending_color']  = "#f23939";
 $config['confirm_color']  = "#219427";
