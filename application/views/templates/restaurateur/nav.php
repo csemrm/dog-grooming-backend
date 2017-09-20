@@ -6,7 +6,7 @@
                 <div class="m-stack m-stack--ver m-stack--general">
                     <div class="m-stack__item m-stack__item--middle m-brand__logo">
                         <a href="<?php echo site_url() . "/dashboard"; ?>" class="m-brand__logo-wrapper">
-                            <img alt="" src="<?php echo base_url('/theme/assets/default/media/img/logo/logo_default_dark.png'); ?>"/>
+                            <img alt="Logo" src="<?php echo base_url('/theme/assets/logos/logo-white.png'); ?>"/>
                         </a>
                     </div>
                     <div class="m-stack__item m-stack__item--middle m-brand__tools">
@@ -41,6 +41,7 @@
                     <i class="la la-close"></i>
                 </button>
                 <div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark "  >
+                    <h2 class="page-header">Welcome, <?php echo $this->user->get_logged_in_user_info()->user_name; ?>!</h2>
                 </div>
                 <!-- END: Horizontal Menu -->
                 <!-- BEGIN: Topbar -->
@@ -105,7 +106,7 @@
 
                                                     <li class="m-nav__separator m-nav__separator--fit"></li>
                                                     <li class="m-nav__item">
-                                                        <a href="<?php echo site_url('logout');?>" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                                                        <a href="<?php echo site_url('logout'); ?>" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
                                                             Logout
                                                         </a>
                                                     </li>

@@ -39,7 +39,7 @@
                     <div class="m-login__container">
                         <div class="m-login__logo">
                             <a href="#">
-                                <img src="<?php echo base_url('/theme/assets/app/media/img/logos/logo-1.png'); ?>">
+                                <img src="<?php echo base_url('/theme/assets/logos/logo_1.png'); ?>">
                             </a>
                         </div>
                         <div class="m-login__signin">
