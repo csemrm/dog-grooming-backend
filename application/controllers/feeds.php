@@ -69,9 +69,9 @@ class Feeds extends Main
 		$pag = $this->config->item('pagination');
 		
 		$pag['base_url'] = site_url('feeds/search');
-		$pag['total_rows'] = $this->feed->count_all_by($this->get_current_shop()->id, $search_term);
+		$pag['total_rows'] = $this->feed->count_all_by($search_term);
 		
-		$data['feeds'] = $this->feed->get_all_by($this->get_current_shop()->id, $search_term,$pag['per_page'],$this->uri->segment(3));
+		$data['feeds'] = $this->feed->get_all_by($search_term,$pag['per_page'],$this->uri->segment(3));
 		$data['pag'] = $pag;
 		
 		$content['content'] = $this->load->view('feeds/search',$data,true);		
@@ -148,7 +148,7 @@ class Feeds extends Main
 		if (!isset($upload_data['error'])) {
 			foreach ($upload_data as $upload) {
 				$image = array(
-								'item_id'=> $feed_id,
+								'parent_id'=> $feed_id,
 								'type' => 'feed',
 								'path' => $upload['file_name'],
 								'width'=>$upload['image_width'],

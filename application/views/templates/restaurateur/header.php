@@ -28,5 +28,25 @@
         <link href="<?php echo base_url('/theme/assets/default/base/style.bundle.css'); ?>" rel="stylesheet" type="text/css" />
         <!--end::Base Styles -->
         <link rel="shortcut icon" href="<?php echo base_url('/theme/assets/default/media/img/logo/favicon.ico'); ?>" />
+        <!-- For Calendar -->
+
+        <link href="<?php echo base_url('css/fullcalendar/fullcalendar.css'); ?>" rel="stylesheet">
+        <link href="<?php echo base_url('css/fullcalendar/fullcalendar.print.css'); ?>" rel='stylesheet' media='print'>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="<?php echo base_url('js/jquery.js'); ?>"></script>
+        <script src="<?php echo base_url('js/bootstrap.min.js'); ?>"></script>
+
+        <script src="<?php echo base_url('js/dashboard.js'); ?>"></script>
+        <script src="<?php echo base_url('js/jquery.validate.js'); ?>"></script>
+        <script src="<?php echo base_url('js/modernizr.custom.js'); ?>"></script>
+        <script src="<?php echo base_url('js/bootstrap-datetimepicker.min.js'); ?>"></script>
+
+
+        <script src="<?php echo base_url('js/fullcalendar/moment.min.js'); ?>"></script>
+         <!--<script src="<?php echo base_url('js/fullcalendar/jquery-2.1.1.js'); ?>"></script>
+        <script src="<?php echo base_url('js/fullcalendar/jquery-ui.custom.min.js'); ?>"></script>
+        -->
+        <script src="<?php echo base_url('js/fullcalendar/fullcalendar.min.js'); ?>"></script>
+        <script src="<?php echo base_url('js/fullcalendar/icheck.min.js'); ?>"></script>
     </head>
     <!-- end::Head -->

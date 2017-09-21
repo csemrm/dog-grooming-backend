@@ -305,8 +305,8 @@ $lang['shop_lng_label']                = "Longitude";
 $lang['shop_lng_tooltips']             = "Please provide shop longitude information.";
 
 
-$lang['branding_label']                = "Branding";
-$lang['branding_info_label']           = "Branding Information.";
+$lang['branding_label']                = "System Configuration";
+$lang['branding_info_label']           = "System Information.";
 $lang['company_name_label']                  = "Company Name";
 $lang['slugon_label']                        = "Slugon.";
 $lang['compnay_logo_label']                  = "Compnay Logo";
