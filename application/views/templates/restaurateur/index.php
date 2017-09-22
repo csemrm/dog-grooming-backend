@@ -40,14 +40,16 @@
     <!-- end::Scroll Top -->
     <!-- begin::Quick Nav -->
 
+<script src='<?php echo base_url('/theme/fullcalendar/lib/jquery.min.js'); ?>' type="text/javascript"></script>
+<script src='<?php echo base_url('/theme/fullcalendar/lib/moment.min.js'); ?>' type="text/javascript"></script>
     <!-- begin::Quick Nav -->
     <!--begin::Base Scripts -->
     <script src="<?php echo base_url('/theme/assets/vendors/base/vendors.bundle.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo base_url('/theme/assets/default/base/scripts.bundle.js'); ?>" type="text/javascript"></script>
     <!--end::Base Scripts -->
-    <!--begin::Page Snippets -->
-    <script src="<?php echo base_url('/theme/assets/app/js/dashboard.js'); ?>" type="text/javascript"></script>
-    <!--end::Page Snippets -->
+   
+<script src='<?php echo base_url('/theme/fullcalendar/fullcalendar.min.js'); ?>' type="text/javascript"></script>
+
 </body>
 <!-- end::Body -->
 </html>

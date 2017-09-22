@@ -128,7 +128,6 @@ $this->lang->load('ps', 'english');
                             <div class="col-lg-2"></div>
                             <div class="col-lg-6">
                                 <input type="submit" value="<?php echo $this->lang->line('update_button') ?>" class="btn btn-primary"/>
-                                <a class="btn btn-primary" href="<?php echo site_url('feeds/gallery/' . $feed->id); ?>"><?php echo $this->lang->line('goto_gallery_button') ?></a>
                                 <a href="<?php echo site_url('feeds'); ?>" class="btn btn-secondary"><?php echo $this->lang->line('cancel_button') ?></a>
 
 
@@ -150,7 +149,7 @@ $this->lang->load('ps', 'english');
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title"><?php echo $this->lang->line('replace_photo_button') ?></h4>
+                <h4 class="modal-title"><?php echo $this->lang->line('upload_photo_label') ?></h4>
             </div>
             <?php
             $attributes = array('id' => 'upload-form', 'enctype' => 'multipart/form-data');

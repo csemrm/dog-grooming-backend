@@ -28,7 +28,6 @@
         <link href="<?php echo base_url('/theme/assets/default/base/style.bundle.css'); ?>" rel="stylesheet" type="text/css" />
         <!--end::Base Styles -->
         <link rel="shortcut icon" href="<?php echo base_url('/theme/assets/default/media/img/logo/favicon.ico'); ?>" />
-        <!-- For Calendar -->
 
         <link href="<?php echo base_url('css/fullcalendar/fullcalendar.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('css/fullcalendar/fullcalendar.print.css'); ?>" rel='stylesheet' media='print'>

@@ -115,10 +115,52 @@ $this->lang->load('ps', 'english');
 
                     </div>
                     <div class="m-form__seperator m-form__seperator--dashed"></div>
-                    <div class="m-form__section m-form__section--last">
+                    <div class="m-form__section">
                         <div class="m-form__heading">
                             <h3 class="m-form__heading-title">
                                 Email Info:
+                            </h3>
+                        </div> 
+
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                <?php echo $this->lang->line('contact_address_label') ?>
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="contact address" name='contact_address' id='contact_address' value='<?php echo $branding->contact_address; ?>'>
+
+                                <span class="m-form__help">
+                                    <?php echo $this->lang->line('contact_address_label') ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-form__seperator m-form__seperator--dashed"></div>
+                    <div class="m-form__section ">
+                        <div class="m-form__heading">
+                            <h3 class="m-form__heading-title">
+                                Mailchimp Info:
+                            </h3>
+                        </div> 
+
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                <?php echo $this->lang->line('contact_address_label') ?>
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="contact address" name='contact_address' id='contact_address' value='<?php echo $branding->contact_address; ?>'>
+
+                                <span class="m-form__help">
+                                    <?php echo $this->lang->line('contact_address_label') ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-form__seperator m-form__seperator--dashed"></div>
+                    <div class="m-form__section m-form__section--last">
+                        <div class="m-form__heading">
+                            <h3 class="m-form__heading-title">
+                                Services/Menu Offered:
                             </h3>
                         </div> 
 

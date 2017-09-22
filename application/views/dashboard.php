@@ -12,9 +12,6 @@ $this->lang->load('ps', 'english');
 
     </div>
 </div>
-
-
-
 <?php if ($this->session->flashdata('success')): ?>
     <div class="alert alert-success fade in">
         <?php echo $this->session->flashdata('success'); ?>
@@ -31,7 +28,7 @@ $this->lang->load('ps', 'english');
 <div class="m-content">
 
     <div class="row">
-
+        <?php echo $calendarView; ?>
     </div>
 </div>
 

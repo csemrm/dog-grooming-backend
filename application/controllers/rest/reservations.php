@@ -32,9 +32,8 @@ class Reservations extends REST_Controller {
         if (!array_key_exists('dog_id', $data)) {
             $this->response(array('error' => array('message' => 'require_shop_id')));
         }
-
         $reservation_data = array(
-            'resv_date' => $data['resv_date'],
+            'resv_date' => date('Y-m-d', strtotime($data['resv_date'])),
             'resv_time' => $data['resv_time'],
             'note' => $data['note'],
             'shop_id' => 1,

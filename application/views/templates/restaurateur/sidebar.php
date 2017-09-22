@@ -33,7 +33,7 @@
 
                 <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
                     <a  href="#" class="m-menu__link m-menu__toggle">
-                        <i class="m-menu__link-icon flaticon-signs-2"></i>
+                        <i class="m-menu__link-icon flaticon-information"></i>
                         <span class="m-menu__link-text">
                             <?= $grp->group_name ?>
                         </span>

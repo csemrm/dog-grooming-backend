@@ -76,7 +76,6 @@ $this->lang->load('ps', 'english');
                             <div class="col-lg-2"></div>
                             <div class="col-lg-6">
                                 <input type="submit" name="save" value="<?php echo $this->lang->line('save_button') ?>" class="btn btn-primary"/>
-                                <input type="submit" name="gallery" value="<?php echo $this->lang->line('save_go_button') ?>" class="btn btn-primary"/>
                                 <a href="<?php echo site_url('feeds'); ?>" class="btn btn-secondary"><?php echo $this->lang->line('cancel_button') ?></a>
 
                             </div>

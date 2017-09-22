@@ -15,7 +15,8 @@ class Dashboard extends Main {
     function index($shop_id = 1) {
         $shop_id = $this->get_current_shop()->id;
         $data['reservations'] = $this->reservation->get_all_by(1)->result();
-        $content['content'] = $this->load->view('reservations/calendarView', $data, true);
+        $data['calendarView'] = $this->load->view('reservations/calendarView', $data, true);
+        $content['content'] = $this->load->view('dashboard', $data, true);
         $this->load_template($content);
     }
 

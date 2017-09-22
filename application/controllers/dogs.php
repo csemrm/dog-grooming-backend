@@ -77,8 +77,7 @@ class Dogs extends Main {
         $pag['total_rows'] = $this->category->count_all_by(array('searchterm' => $search_term));
 
         $data['searchterm'] = $search_term;
-        $data['categories'] = $this->category->get_all_by(null,
-                array('searchterm' => $search_term), $pag['per_page'], $this->uri->segment(3)
+        $data['categories'] = $this->category->get_all_by(null, array('searchterm' => $search_term), $pag['per_page'], $this->uri->segment(3)
         );
         $data['pag'] = $pag;
 
@@ -247,7 +246,7 @@ class Dogs extends Main {
         redirect(site_url('dogs/edit/' . $category_id));
     }
 
-    function exists($appuser_id = 0) {
+    function exists($category_id = 0) {
         $name = $_REQUEST['name'];
         if (strtolower($this->category->get_info($category_id)->name) == strtolower($name)) {
             echo "true";

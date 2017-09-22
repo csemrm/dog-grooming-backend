@@ -103,7 +103,9 @@ class Category extends Base_Model {
         if (isset($conditions['searchterm'])) {
             $this->db->like('name', $conditions['searchterm']);
         }
-
+        if (isset($conditions['appuser_id'])) {
+            $this->db->where('name', $conditions['appuser_id']);
+        }
         //$this->db->where('appuser_id', $appuser_id);
         $this->db->where('is_published', 1);
         return $this->db->count_all_results();
