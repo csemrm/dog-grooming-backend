@@ -67,6 +67,20 @@ $this->lang->load('ps', 'english');
                                 </span>
                             </div>
                         </div> 
+                        
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Expires On
+                            </label>
+                            <div class="col-lg-9">
+                                <div class='input-group date' id='m_datepicker_1_validate'>
+                                    <input class="form-control m-input" type="date" readonly placeholder="MM/DD/YYYY" name='expired_date' id='expired_date'>
+                                    <span class="input-group-addon">
+                                        <i class="la la-calendar-check-o"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="m-portlet__foot m-portlet__foot--fit">
@@ -91,6 +105,10 @@ $this->lang->load('ps', 'english');
 </div> 
 <script>
     $(document).ready(function () {
+        $("#m_datepicker_1_validate").datepicker({
+        todayHighlight: !0,
+        dateFormat: "YYYY-MM-DD"
+    });
         $('#feed-form').validate({
             rules: {
                 title: {

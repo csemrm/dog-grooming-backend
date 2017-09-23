@@ -64,47 +64,15 @@
                 </div>
             <?php endif; ?>
             <!--begin: Datatable -->
-            <div class="m_datatable" id="ajax_data"><table class="table table-striped table-bordered">
+            <div class="m_datatable" id="ajax_data">
+                <table class="table table-striped table-bordered">
                     <tr>
-                        <th><?php echo $this->lang->line('no_label') ?></th>
+                        <th>Date</th>
+                        <th>Expires On</th>
                         <th><?php echo $this->lang->line('feed_title_label') ?></th>
-
-                        <?php
-                        if (!$this->session->userdata('is_shop_admin')) {
-                            if (in_array('edit', $allowed_accesses)):
-                                ?>
-                                <th><?php echo $this->lang->line('edit_label') ?></th>
-                                <?php
-                            endif;
-                        } else {
-                            ?>
-                            <th><?php echo $this->lang->line('edit_label') ?></th>
-                        <?php } ?>
-
-                        <?php
-                        if (!$this->session->userdata('is_shop_admin')) {
-                            if (in_array('delete', $allowed_accesses)):
-                                ?>
-                                <th><?php echo $this->lang->line('delete_label') ?></th>
-                                <?php
-                            endif;
-                        } else {
-                            ?>
-                            <th><?php echo $this->lang->line('delete_label') ?></th>
-                        <?php } ?>
-
-                        <?php
-                        if (!$this->session->userdata('is_shop_admin')) {
-                            if (in_array('publish', $allowed_accesses)):
-                                ?>
-                                <th><?php echo $this->lang->line('publish_label') ?></th>
-                                <?php
-                            endif;
-                        } else {
-                            ?>
-                            <th><?php echo $this->lang->line('publish_label') ?></th>
-                        <?php } ?>
-
+                        <th><?php echo $this->lang->line('description_label') ?></th>
+                        <th>Status</th> 
+                        <th><?php echo $this->lang->line('edit_label') ?>  </th> <th><?php echo $this->lang->line('delete_label') ?></th> 
                     </tr>
                     <?php
                     if (!$count = $this->uri->segment(3))
@@ -113,47 +81,30 @@
                         foreach ($feeds->result() as $feed):
                             ?>
                             <tr>
-                                <td><?php echo ++$count; ?></td>
+                                <td><?php echo english_date_verbose($feed->added); ?></td>
+                                <td><?php echo english_date_verbose($feed->expired_date); ?></td>
                                 <td><?php echo $feed->title; ?></td>
+                                <td><?php echo $feed->description; ?></td>
+                                <td>
+                                    <?php if ($feed->is_published == 1): ?>
 
-                                <?php
-                                if (in_array('edit', $allowed_accesses)):
-                                    ?>
-                                    <td><a href="<?php echo site_url("feeds/edit/" . $feed->id); ?>" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a></td>
-                                    <?php
-                                endif;
-                                ?>
+                                        <button class="btn btn-sm btn-primary unpublish"   
+                                                feedId='<?php echo $feed->id; ?>'>Yes
+                                        </button>
 
+                                    <?php else: ?>
 
-                                <?php
-                                if (in_array('delete', $allowed_accesses)):
-                                    ?>
-                                    <td>
-                                        <a href="<?php echo site_url("feeds/delete/" . $feed->id); ?>" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete"><i class="la la-trash"></i></a>
-                                    </td>
-                                    <?php
-                                endif;
-                                ?>
+                                        <button class="btn btn-sm btn-danger publish"
+                                                feedId='<?php echo $feed->id; ?>'>No</button>
 
-                                <?php
-                                if (in_array('publish', $allowed_accesses)):
-                                    ?>
-                                    <td>
-                                        <?php if ($feed->is_published == 1): ?>
+                                    <?php endif; ?>
+                                </td>
 
-                                            <button class="btn btn-sm btn-primary unpublish"   
-                                                    feedId='<?php echo $feed->id; ?>'>Yes
-                                            </button>
+                                <td><a href="<?php echo site_url("feeds/edit/" . $feed->id); ?>" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a> 
+                                </td>
 
-                                        <?php else: ?>
+                                <td> <a class='btn-delete' data-toggle="modal" data-target="#myModal" id="<?php echo $feed->id; ?>"class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete"><i class="la la-trash"></i></a></td>
 
-                                            <button class="btn btn-sm btn-danger publish"
-                                                    feedId='<?php echo $feed->id; ?>'>No</button>
-
-                                        <?php endif; ?>
-                                    </td>
-                                <?php endif;
-                                ?>
 
                             </tr>
                             <?php
@@ -178,9 +129,36 @@
             <!--end: Datatable -->
         </div>
     </div>
-</div> 
+</div>
+
+<div class="modal fade"  id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p><?php echo $this->lang->line('delete_confirm_message') ?></p>  
+            </div>
+            <div class="modal-footer"> 
+                <a type="button" class="btn btn-primary btn-no" href='<?php echo site_url("feeds/delete/"); ?>'>
+                    <?php echo $this->lang->line('yes_all_label') ?></a>
+                <a type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <?php echo $this->lang->line('cancel_button') ?></a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
     $(document).ready(function () {
+        $('.btn-delete').click(function () {
+            var id = $(this).attr('id');
+            var btnYes = $('.btn-yes').attr('href');
+            var btnNo = $('.btn-no').attr('href');
+            $('.btn-yes').attr('href', btnYes + "/" + id);
+            $('.btn-no').attr('href', btnNo + "/" + id);
+        });
         $(document).on('click', '.publish', function () {
 
             var btn = $(this);

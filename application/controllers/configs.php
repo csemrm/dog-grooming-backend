@@ -12,7 +12,6 @@ class Configs extends Main {
     function index() {
         $this->edit(1);
     }
- 
 
     function edit($branding_id = 1) {
         if (!$this->session->userdata('is_shop_admin')) {
@@ -26,10 +25,24 @@ class Configs extends Main {
                 'contact_email' => $this->input->post('contact_email'),
                 'about_us' => $this->input->post('about_us'),
                 'contact_address' => $this->input->post('contact_address'),
+                'website' => $this->input->post('website'),
+                'facebook' => $this->input->post('facebook'),
+                'twitter' => $this->input->post('twitter'),
+                'email_address' => $this->input->post('email_address'),
+                'email_username' => $this->input->post('email_username'),
+                'email_password' => $this->input->post('email_password'),
+                'email_smtpserver' => $this->input->post('email_smtpserver'),
+                'email_smtp_port' => $this->input->post('email_smtp_port'),
+                'email_ssl' => $this->input->post('email_ssl'),
+                'mailchimp_username' => $this->input->post('mailchimp_username'),
+                'mailchimp_apikey' => $this->input->post('mailchimp_apikey'),
+                'mailchimp_enable' => $this->input->post('mailchimp_enable'),
+                'company_phone' => $this->input->post('company_phone'),
+                    // 'services' => $this->input->post('services'),
             );
 
             if ($this->branding->save($branding_data, $branding_id)) {
-                $this->session->set_flashdata('success', 'Branding Information is successfully updated.');
+                $this->session->set_flashdata('success', 'Configuration is successfully updated.');
             } else {
                 $this->session->set_flashdata('error', 'Database error occured.Please contact your system administrator.');
             }
@@ -43,7 +56,52 @@ class Configs extends Main {
         $this->load_template($content);
     }
 
-    
+    function add_service($branding_id = 1) {
+        $branding_id = $this->input->post('brandingid');
+        if ($this->input->server('REQUEST_METHOD') == 'POST') {
+            $service = $this->input->post('service');
+            if ($branding_id && $service) {
+                $services = $this->branding->get_info($branding_id)->services;
+                if ($services)
+                    $services = explode(',', $services);
+                $services[] = $service;
+                $services = array_unique($services);
+                $branding_data = array(
+                    'services' => implode(',', $services)
+                );
+                $saved = $this->branding->save($branding_data, $branding_id);
+                if ($saved) {
+                    $this->session->set_flashdata('success', 'Configuration is successfully updated.');
+                } else {
+                    $this->session->set_flashdata('error', 'Database error occured.Please contact your system administrator.');
+                }
+                redirect(site_url('configs'));
+            }
+            redirect(site_url('configs'));
+        }
+    }
+
+    function delete_service($branding_id = 0, $service = '') {
+        if ($branding_id) {
+            $services = explode(',', $this->branding->get_info($branding_id)->services);
+            if (in_array($service, $services)) {
+                if (($key = array_search($service, $services)) !== false) {
+                    unset($services[$key]);
+                    $branding_data = array(
+                        'services' => implode(',', $services)
+                    );
+                    $saved = $this->branding->save($branding_data, $branding_id);
+                    if ($saved) {
+                        $this->session->set_flashdata('success', 'Configuration is successfully updated.');
+                    } else {
+                        $this->session->set_flashdata('error', 'Database error occured.Please contact your system administrator.');
+                    }
+                    redirect(site_url('configs'));
+                }
+            }
+        }
+        redirect(site_url('configs'));
+    }
 
     function delete($branding_id = 0) {
         if (!$this->session->userdata('is_shop_admin')) {

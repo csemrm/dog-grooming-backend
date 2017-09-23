@@ -60,19 +60,6 @@ $this->lang->load('ps', 'english');
                         </div>
                         <div class="form-group m-form__group row">
                             <label class="col-lg-3 col-form-label">
-                                <?php echo $this->lang->line('slugon_label') ?>
-                            </label>
-                            <div class="col-lg-9">
-                                <input class="form-control m-input" type="text" placeholder="slugon" name='slugon' id='slugon' value='<?php echo $branding->slugon; ?>'>
-
-                                <span class="m-form__help">
-                                    <?php echo $this->lang->line('slugon_label') ?>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group m-form__group row">
-                            <label class="col-lg-3 col-form-label">
                                 <?php echo $this->lang->line('contact_email_label') ?>
                             </label>
                             <div class="col-lg-9">
@@ -83,21 +70,6 @@ $this->lang->load('ps', 'english');
                                 </span>
                             </div>
                         </div>
-
-
-                        <div class="form-group m-form__group row">
-                            <label class="col-lg-3 col-form-label">
-                                <?php echo $this->lang->line('about_us_label') ?>
-                            </label>
-                            <div class="col-lg-9">
-                                <input class="form-control m-input" type="text" placeholder="about us" name='about_us' id='about_us' value='<?php echo $branding->about_us; ?>'>
-
-                                <span class="m-form__help">
-                                    <?php echo $this->lang->line('about_us_label') ?>
-                                </span>
-                            </div>
-                        </div>
-
                         <div class="form-group m-form__group row">
                             <label class="col-lg-3 col-form-label">
                                 <?php echo $this->lang->line('contact_address_label') ?>
@@ -110,9 +82,80 @@ $this->lang->load('ps', 'english');
                                 </span>
                             </div>
                         </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Company Phone
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="Company Phone" name='company_phone' id='company_phone' value='<?php echo $branding->company_phone; ?>'>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Website
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="Company Website" name='website' id='website' value='<?php echo $branding->website; ?>'>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Facebook Page URL
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="Facebook" name='facebook' id='facebook' value='<?php echo $branding->facebook; ?>'>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Twitter Page URL
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="Twitter" name='twitter' id='twitter' value='<?php echo $branding->twitter; ?>'>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Photo Upload 
+                            </label>  
+                            <div class="col-lg-9">
+                                <a class="btn btn-primary btn-upload pull-right" data-toggle="modal" data-target="#uploadImage">Replace Photo</a>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+
+                            </label>
+                            <div class="col-lg-9">
+                                <?php
+                                $images = $this->image->get_all_by_type($branding->id, 'branding')->result();
+                                if (count($images) > 0):
+                                    ?>
+
+                                    <?php
+                                    $i = 0;
+                                    foreach ($images as $img) {
 
 
+                                        echo '<div class="col-md-4" style="height:100">'
+                                        . '<div class="thumbnail">' .
+                                        '<img src="' . base_url('uploads/thumbnail/' . $img->path) . '">' .
+                                        '</div>'
+                                        . '</div>';
+                                        $i++;
+                                    }
+                                    ?>
 
+
+                                    <?php
+                                endif;
+                                ?> 
+                            </div>
+
+                        </div>
                     </div>
                     <div class="m-form__seperator m-form__seperator--dashed"></div>
                     <div class="m-form__section">
@@ -124,14 +167,72 @@ $this->lang->load('ps', 'english');
 
                         <div class="form-group m-form__group row">
                             <label class="col-lg-3 col-form-label">
-                                <?php echo $this->lang->line('contact_address_label') ?>
+                                Email Address
                             </label>
                             <div class="col-lg-9">
-                                <input class="form-control m-input" type="text" placeholder="contact address" name='contact_address' id='contact_address' value='<?php echo $branding->contact_address; ?>'>
+                                <input class="form-control m-input" type="text" placeholder="Email Address" name='email_address' id='email_address' value='<?php echo $branding->email_address; ?>'>
 
-                                <span class="m-form__help">
-                                    <?php echo $this->lang->line('contact_address_label') ?>
-                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Username
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="Username" name='email_username' id='email_username' value='<?php echo $branding->email_username; ?>'>
+
+
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Password
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="password" placeholder="Password" name='email_password' id='email_password' value='<?php echo $branding->email_password; ?>'>
+
+
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                SMTP Server
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="SMTP Server" name='email_smtpserver' id='email_smtpserver' value='<?php echo $branding->email_smtpserver; ?>'>
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                SMTP Port
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="Port" name='email_smtp_port' id='email_smtp_port' value='<?php echo $branding->email_smtp_port; ?>'>
+
+
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Security
+                            </label>
+                            <div class="col-lg-9">
+                                <div class="">
+                                    <label class="m-radio">
+                                        <?php $email_ssl = $branding->email_ssl; ?>
+                                        <input type="radio" name="email_ssl" value="0"  <?php echo ($branding->email_ssl == 0) ? 'checked=""' : ''; ?> >
+                                        Unencrypted 
+                                        <span></span>
+                                    </label>
+                                    <label class="m-radio">
+                                        <input type="radio" name="email_ssl" <?php echo ($branding->email_ssl == 1) ? 'checked=""' : ''; ?> value="1">
+                                        SSL/TLS (Recommended) 
+                                        <span></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -145,16 +246,37 @@ $this->lang->load('ps', 'english');
 
                         <div class="form-group m-form__group row">
                             <label class="col-lg-3 col-form-label">
-                                <?php echo $this->lang->line('contact_address_label') ?>
+                                Username
                             </label>
                             <div class="col-lg-9">
-                                <input class="form-control m-input" type="text" placeholder="contact address" name='contact_address' id='contact_address' value='<?php echo $branding->contact_address; ?>'>
+                                <input class="form-control m-input" type="text" placeholder="Mailchimp Username" name='mailchimp_username' id='mailchimp_username' value='<?php echo $branding->mailchimp_username; ?>'>
 
-                                <span class="m-form__help">
-                                    <?php echo $this->lang->line('contact_address_label') ?>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                API Key
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="API Key" name='mailchimp_apikey' id='mailchimp_apikey' value='<?php echo $branding->mailchimp_apikey; ?>'>
+
+
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Enable
+                            </label>
+                            <div class="col-lg-9">
+                                <span class="m-switch">
+                                    <label>
+                                        <input type="checkbox" value="1" <?php echo ($branding->mailchimp_enable == 1) ? 'checked' : ''; ?> name="mailchimp_enable">
+                                        <span></span>
+                                    </label>
                                 </span>
                             </div>
                         </div>
+
                     </div>
                     <div class="m-form__seperator m-form__seperator--dashed"></div>
                     <div class="m-form__section m-form__section--last">
@@ -165,15 +287,40 @@ $this->lang->load('ps', 'english');
                         </div> 
 
                         <div class="form-group m-form__group row">
-                            <label class="col-lg-3 col-form-label">
-                                <?php echo $this->lang->line('contact_address_label') ?>
-                            </label>
-                            <div class="col-lg-9">
-                                <input class="form-control m-input" type="text" placeholder="contact address" name='contact_address' id='contact_address' value='<?php echo $branding->contact_address; ?>'>
+                            
+                            <div class="col-lg-6">
 
-                                <span class="m-form__help">
-                                    <?php echo $this->lang->line('contact_address_label') ?>
-                                </span>
+                                <table class="table table-striped table-bordered">
+                                    <tr>
+                                        <th><?php echo $this->lang->line('no_label') ?></th>
+                                        <th> Service Name</th>
+                                        <th><?php echo $this->lang->line('delete_label') ?></th>
+
+
+
+                                    </tr>
+                                    <?php
+                                    $count = 0;
+                                    $services = explode(',', $branding->services);
+                                    foreach ($services as $service):
+                                        if ($service):
+                                            ?>
+                                            <tr>
+                                                <td><?php echo ++$count; ?></td>
+                                                <td><?php echo $service; ?></td>
+                                                <td><a class='btn-delete' data-toggle="modal" data-target="#myModal" title="<?php echo $service; ?>"class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete"><i class="la la-trash"></i></a></td>
+                                            </tr>
+                                            <?php
+                                        endif;
+                                    endforeach;
+                                    ?>
+                                    <tr>
+                                        <td colspan='3'>
+                                            <a data-toggle="modal" data-target="#addServices" id="newservice" class="m-portlet__nav-link btn m-btn m-btn--icon m-btn--icon-only m-btn--pill" title="Add">Add Service</a>
+                                        </td>
+                                    </tr> 
+                                </table>
+
                             </div>
                         </div>
                     </div>
@@ -183,9 +330,7 @@ $this->lang->load('ps', 'english');
                         <div class="row">
                             <div class="col-lg-2"></div>
                             <div class="col-lg-6">
-                                <button type="reset" class="btn btn-primary">
-                                    Submit
-                                </button>
+                                <input type="submit" value="Save" class="btn btn-primary" />
                                 <button type="reset" class="btn btn-secondary">
                                     Cancel
                                 </button>
@@ -228,51 +373,78 @@ $this->lang->load('ps', 'english');
     </div>
 </div>
 
-
-
-<div class="modal fade"  id="deletePhoto">
+<div class="modal fade"  id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title"><?php echo $this->lang->line('delete_cover_photo_label') ?></h4>
+                <h4 class="modal-title">Delete Service</h4>
             </div>
             <div class="modal-body">
-                <p><?php echo $this->lang->line('delete_photo_confirm_message') ?></p>
+                <p><?php echo $this->lang->line('delete_confirm_message') ?></p>  
+            </div>
+            <div class="modal-footer"> 
+                <a type="button" class="btn btn-primary btn-yes" href='<?php echo site_url('configs/delete_service/' . $branding->id); ?>'>
+                    <?php echo $this->lang->line('yes_all_label') ?></a>
+                <a type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <?php echo $this->lang->line('cancel_button') ?></a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade"  id="addServices">
+    <div class="modal-dialog">
+        <?php
+        $attributes = array('id' => 'add_service-form', "class" => "m-form m-form--label-align-right");
+        echo form_open(site_url('configs/add_service'), $attributes);
+        ?> 
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">New Service</h4>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-12 col-form-label">Service Name</label>
+                <div class="col-lg-12">
+                    <input type="text" id="service" required="" name="service">
+                    <input type="hidden"required="" value="<?= $branding->id ?>" name="brandingid">
+                </div>
             </div>
             <div class="modal-footer">
-                <a type="button" class="btn btn-primary btn-delete-image"><?php echo $this->lang->line('yes_button') ?></a>
-                <a type="button" class="btn btn-primary" data-dismiss="modal"><?php echo $this->lang->line('cancel_button') ?></a>
+                <input type="submit" class="btn btn-primary" value="<?php echo $this->lang->line('yes_button') ?>"/>
+                <a type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('cancel_button') ?></a>
             </div>
         </div>
+         <?php echo form_close(); ?>
     </div>			
 </div>
 <script>
     $(document).ready(function () {
         $('#category-form').validate({
             rules: {
-                name: {
+                company_name: {
                     required: true,
-                    minlength: 4,
-                    remote: '<?php echo site_url('categories/exists/' . $branding->id); ?>'
+                    minlength: 3,
                 }
             },
             messages: {
-                name: {
+                company_name: {
                     required: "Please fill category name.",
-                    minlength: "The length of category name must be greater than 4",
-                    remote: "Category name is already existed in the system"
+                    minlength: "The length of name must be greater than 4"
                 }
             }
         });
 
-        $('.delete-img').click(function (e) {
+
+        $('.btn-delete').click(function (e) {
             e.preventDefault();
-            var id = $(this).attr('id');
-            var image = $(this).attr('image');
-            var action = '<?php echo site_url('configs/delete_image/' . $branding->id); ?>/' + id + '/' + image;
-            $('.btn-delete-image').attr('href', action);
+            var title = $(this).attr('title');
+            var btnYes = $('.btn-yes').attr('href');
+            $('.btn-yes').attr('href', btnYes + "/" + title);
+
         });
+
     });
 
     $(function () {
