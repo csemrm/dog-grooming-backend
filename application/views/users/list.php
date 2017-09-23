@@ -68,9 +68,14 @@
                 <table class="table table-striped table-bordered">
                     <tr>
                         <th><?php echo $this->lang->line('no_label') ?></th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone#</th>
+                        
                         <th><?php echo $this->lang->line('username_label') ?></th>
                         <th><?php echo $this->lang->line('email_label') ?></th>
                         <th><?php echo $this->lang->line('user_role_label') ?></th>
+                        
                         <?php if (in_array('edit', $allowed_accesses)): ?>
                             <th><?php echo $this->lang->line('edit_label') ?></th>
                         <?php endif; ?>
@@ -86,6 +91,9 @@
                             ?>
                             <tr>
                                 <td><?php echo ++$count; ?></td>
+                                <td><?php echo $user->first_name; ?></td>
+                                <td><?php echo $user->last_name; ?></td>
+                                <td><?php echo $user->phone; ?></td>
                                 <td><?php echo $user->user_name; ?></td>
                                 <td><?php echo $user->user_email; ?></td>
                                 <td><?php echo $this->role->get_name($user->role_id); ?></td>

@@ -47,6 +47,35 @@ $this->lang->load('ps', 'english');
                         </div>
                         <div class="form-group m-form__group row">
                             <label class="col-lg-3 col-form-label">
+                                First Name
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="First Name" name='first_name' id='first_name'>
+
+                            </div>
+                        </div>
+                        
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Last Name
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="Last Name" name='last_name' id='last_name'>
+
+                            </div>
+                        </div>
+                        
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Phone#
+                            </label>
+                            <div class="col-lg-9">
+                                <input class="form-control m-input" type="text" placeholder="Phone" name='phone' id='phone'>
+
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
                                 <?php echo $this->lang->line('username_label') ?>
                             </label>
                             <div class="col-lg-9">

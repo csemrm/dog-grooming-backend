@@ -180,6 +180,8 @@ class User extends Base_Model
 		
 		if (isset($conditions['searchterm'])) {
 			$this->db->like('user_name',$conditions['searchterm']);
+                        $this->db->or_like('first_name',$conditions['searchterm']);
+                        $this->db->or_like('last_name',$conditions['searchterm']);
 		}
 			
 		$this->db->where('status',1);
@@ -192,6 +194,8 @@ class User extends Base_Model
 		
 		if (isset($conditions['searchterm'])) {
 			$this->db->like('user_name',$conditions['searchterm']);
+                        $this->db->or_like('first_name',$conditions['searchterm']);
+                        $this->db->or_like('last_name',$conditions['searchterm']);
 		}
 			
 		$this->db->where('status',1);
