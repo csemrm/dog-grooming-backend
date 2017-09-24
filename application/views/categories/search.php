@@ -67,43 +67,14 @@
             <div class="m_datatable" id="ajax_data">
                 <table class="table table-striped table-bordered">
                     <tr>
-                        <th><?php echo $this->lang->line('no_label') ?></th>
+                        <th><?php echo $this->lang->line('cat_photo_label') ?></th>
                         <th><?php echo $this->lang->line('category_name_label') ?></th>
-                        <?php
-                        if (!$this->session->userdata('is_shop_admin')) {
-                            if (in_array('edit', $allowed_accesses)):
-                                ?>
-                                <th><?php echo $this->lang->line('edit_label') ?></th>
-                                <?php
-                            endif;
-                        } else {
-                            ?>
-                            <th><?php echo $this->lang->line('edit_label') ?></th>
-                        <?php } ?>
-
-                        <?php
-                        if (!$this->session->userdata('is_shop_admin')) {
-                            if (in_array('delete', $allowed_accesses)):
-                                ?>
-                                <th><?php echo $this->lang->line('delete_label') ?></th>
-                                <?php
-                            endif;
-                        } else {
-                            ?>
-                            <th><?php echo $this->lang->line('delete_label') ?></th>
-                        <?php } ?>
-
-                        <?php
-                        if (!$this->session->userdata('is_shop_admin')) {
-                            if (in_array('publish', $allowed_accesses)):
-                                ?>
-                                <th><?php echo $this->lang->line('publish_label') ?></th>
-                                <?php
-                            endif;
-                        } else {
-                            ?>
-                            <th><?php echo $this->lang->line('publish_label') ?></th>
-                        <?php } ?>
+                        <th>Type</th>
+                        <th>Gender</th>
+                        <th>Weight</th>
+                        <th>Bread</th>
+                        <th><?php echo $this->lang->line('edit_label') ?></th> 
+                        <th><?php echo $this->lang->line('delete_label') ?></th>  
                     </tr>
                     <?php
                     if (!$count = $this->uri->segment(3))
@@ -112,48 +83,37 @@
                         foreach ($categories->result() as $category):
                             ?>
                             <tr>
-                                <td><?php echo ++$count; ?></td>
+                                <td>
+                                    <?php
+                                    $images =  $this->image->get_all_by_type($category->id, "category")->result();;
+                                    if (count($images) > 0):
+                                        $i = 0;
+                                        foreach ($images as $img) {
+                                            echo '<div class="col-md-4" style="height:100">'
+                                            . '<div class="thumbnail">' .
+                                            '<img src="' . base_url('uploads/thumbnail/' . $img->path) . '"><br/>' .
+                                            '</div></div>';
+                                            $i++;
+                                        }
+                                    endif;
+                                    ?> 
+                                </td>
                                 <td><?php echo $category->name; ?></td>
-                                <?php
-                                if (in_array('edit', $allowed_accesses)):
-                                    ?>
-                                    <td><a href="<?php echo site_url("dogs/edit/" . $category->id); ?>" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a></td>
-                                    <?php
-                                endif;
-                                ?>
-
-
-                                <?php
-                                if (in_array('delete', $allowed_accesses)):
-                                    ?>
-                                    <td><a class='btn-delete' data-toggle="modal" data-target="#myModal" id="<?php echo $category->id; ?>"class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete"><i class="la la-trash"></i></a></td>
-                                    <?php
-                                endif;
-                                ?>
-
-                                <?php
-                                if (in_array('publish', $allowed_accesses)):
-                                    ?>
-                                    <td>
-                                        <?php if ($category->is_published == 1): ?>
-                                            <button class="btn btn-sm btn-primary unpublish"   
-                                                    catId='<?php echo $category->id; ?>'>Yes</button>
-                                                <?php else: ?>
-                                            <button class="btn btn-sm btn-danger publish"
-                                                    catId='<?php echo $category->id; ?>'>No</button><?php endif; ?>
-                                    </td>
-                                <?php endif;
-                                ?>
-
+                                <td><?php echo $category->type; ?></td>
+                                <td><?php echo $category->gender; ?></td>
+                                <td><?php echo $category->weight; ?></td>
+                                <td><?php echo $category->bread; ?></td>
+                                <td><a href="<?php echo site_url("dogs/edit/" . $category->id); ?>" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a></td>
+                                <td><a class='btn-delete' data-toggle="modal" data-target="#myModal" id="<?php echo $category->id; ?>"class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete"><i class="la la-trash"></i></a></td>
                             </tr>
                             <?php
                         endforeach;
                     else:
                         ?>
                         <tr>
-                            <td colspan='7'>
+                            <td colspan='8'>
                                 <span class='glyphicon glyphicon-warning-sign menu-icon'></span>
-							<?php echo $this->lang->line('no_cat_data_message')?>
+                                <?php echo $this->lang->line('no_sub_cat_data_message') ?>
                             </td>
                         </tr>
                     <?php
@@ -203,8 +163,41 @@
                     else
                         alert('System error occured. Please contact your system administrator.');
                 }
-            })
+            });
+        });
+
+        $('.btn-delete').click(function () {
+            var id = $(this).attr('id');
+            var btnYes = $('.btn-yes').attr('href');
+            var btnNo = $('.btn-no').attr('href');
+            $('.btn-yes').attr('href', btnYes + "/" + id);
+            $('.btn-no').attr('href', btnNo + "/" + id);
         });
     });
 </script>
+
+<div class="modal fade"  id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><?php echo $this->lang->line('delete_cat_label') ?></h4>
+            </div>
+            <div class="modal-body">
+                <p><?php echo $this->lang->line('delete_confirm_message') ?></p>  
+            </div>
+            <div class="modal-footer"> 
+                <a type="button" class="btn btn-primary btn-no" href='<?php echo site_url("dogs/delete/"); ?>'>
+                    <?php echo $this->lang->line('yes_all_label') ?></a>
+                <a type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <?php echo $this->lang->line('cancel_button') ?></a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
 

@@ -37,7 +37,7 @@ class Reservation extends Base_Model {
     }
 
     function get_all($limit = false, $offset = false) {
-        $this->db->from($this->table_name); 
+        $this->db->from($this->table_name);
         if ($limit) {
             $this->db->limit($limit);
         }
@@ -48,9 +48,15 @@ class Reservation extends Base_Model {
         return $this->db->get();
     }
 
-    function get_all_by($shop_id) {
+    function count_all_by($user_id) {
         $this->db->from($this->table_name);
-        $this->db->where('shop_id', $shop_id);
+        $this->db->where('user_id', $user_id);
+        return $this->db->count_all_results();
+    }
+
+    function get_all_by($user_id) {
+        $this->db->from($this->table_name);
+        $this->db->where('user_id', $user_id);
         $this->db->order_by('id', 'desc');
         return $this->db->get();
     }

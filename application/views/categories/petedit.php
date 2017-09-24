@@ -36,7 +36,7 @@ $this->lang->load('ps', 'english');
                 <!--begin::Form-->
                 <?php
                 $attributes = array('id' => 'category-form', "class" => "m-form m-form--label-align-right", 'enctype' => 'multipart/form-data');
-                echo form_open(site_url('dogs/edit/' . $category->id), $attributes);
+                echo form_open(site_url('appusers/petedit/' . $category->id), $attributes);
                 ?> 
                 <div class="m-portlet__body">
                     <div class="m-form__section m-form__section--first">
@@ -45,26 +45,7 @@ $this->lang->load('ps', 'english');
                                 <?php echo $this->lang->line('cat_info_lable') ?>:
                             </h3>
                         </div>
-                        <div class="form-group m-form__group row">
-                            <label class="col-lg-3 col-form-label">
-                                <?php echo $this->lang->line('username_label') ?>
-                            </label>
-                            <div class="col-lg-9">
-                                <select class="form-control" name='appuser_id' id='appuser_id'>
-                                    <?php
-                                    $selected = '';
-                                    foreach ($this->appuser->get_all()->result() as $appuser) {
-                                        if ($appuser->id == $category->appuser_id) {
-                                            echo "<option value='" . $appuser->id . "' selected>" . $appuser->username . "</option>";
-                                        } else
-                                            echo "<option value='" . $appuser->id . "'>" . $appuser->username . "</option>";
-                                    }
-                                    ?>
-                                </select>
-                                <span class="m-form__help">
-                                </span>
-                            </div>
-                        </div>
+
                         <div class="form-group m-form__group row">
                             <label class="col-lg-3 col-form-label">
                                 <?php echo $this->lang->line('category_name_label') ?>
@@ -189,8 +170,9 @@ $this->lang->load('ps', 'english');
 
                                 <div class="col-lg-2"></div>
                                 <div class="col-lg-6">
+                                    <input type="hidden" name="appuser_id" value="<?php echo $category->appuser_id; ?>" />
                                     <button type="submit" class="btn btn-primary"><?php echo $this->lang->line('save_button') ?></button>
-                                    <a href="<?php echo site_url('dogs'); ?>" class="btn btn-primary"><?php echo $this->lang->line('cancel_button') ?></a>
+                                    <a href="<?php echo site_url('appusers/detail/' . $category->appuser_id); ?>" class="btn btn-primary"><?php echo $this->lang->line('cancel_button') ?></a>
                                 </div>
                             </div>
                         </div>
@@ -221,6 +203,7 @@ $this->lang->load('ps', 'english');
                 <div class="form-group">
                     <label><?php echo $this->lang->line('upload_photo_label') ?></label>
                     <input type="file" name="images1">
+                    <input type="hidden" name="redirect" value="<?php echo site_url('appusers/petedit/' . $category->id); ?>">
                 </div>
             </div>
             <div class="modal-footer">
@@ -230,24 +213,6 @@ $this->lang->load('ps', 'english');
             </form>
         </div>
     </div>
-</div>
-
-<div class="modal fade"  id="deletePhoto">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title"><?php echo $this->lang->line('delete_cover_photo_label') ?></h4>
-            </div>
-            <div class="modal-body">
-                <p><?php echo $this->lang->line('delete_photo_confirm_message') ?></p>
-            </div>
-            <div class="modal-footer">
-                <a type="button" class="btn btn-primary btn-delete-image"><?php echo $this->lang->line('yes_button') ?></a>
-                <a type="button" class="btn btn-primary" data-dismiss="modal"><?php echo $this->lang->line('cancel_button') ?></a>
-            </div>
-        </div>
-    </div>			
 </div>
 
 <script>

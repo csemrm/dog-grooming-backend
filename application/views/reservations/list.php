@@ -86,7 +86,7 @@
                                 <td><?php echo $reservation->dog->name; ?></td>
                                 <td><?php echo $reservation->user->user_name; ?></td>
                                 <td><?php echo $reservation->note; ?></td>
-                                <td><?php echo $reservation->resv_date; ?></td>
+                                <td><?php echo english_date_verbose( $reservation->resv_date); ?></td>
                                 <td><?php echo $reservation->resv_time; ?></td>
                                 <td><?php echo $reservation->reservation_status->title; ?></td>
 

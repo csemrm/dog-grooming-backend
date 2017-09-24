@@ -35,9 +35,12 @@ class Dogs extends Main {
             if (!isset($upload_data['error'])) {
                 $category_data = array(
                     'name' => $this->input->post('name'),
-                    'ordering' => $this->input->post('ordering'),
                     'appuser_id' => $this->input->post('appuser_id'),
-                    'is_published' => 1
+                    'is_published' => 1,
+                    'type' => $this->input->post('type'),
+                    'gender' => $this->input->post('gender'),
+                    'weight' => $this->input->post('weight'),
+                    'bread' => $this->input->post('bread'),
                 );
 
                 if ($this->category->save($category_data)) {
@@ -107,8 +110,11 @@ class Dogs extends Main {
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
             $category_data = array(
                 'name' => $this->input->post('name'),
-                'ordering' => $this->input->post('ordering'),
-                'appuser_id' => $this->input->post('appuser_id')
+                'appuser_id' => $this->input->post('appuser_id'),
+                'type' => $this->input->post('type'),
+                'gender' => $this->input->post('gender'),
+                'weight' => $this->input->post('weight'),
+                'bread' => $this->input->post('bread'),
             );
 
             if ($this->category->save($category_data, $category_id)) {
@@ -263,7 +269,7 @@ class Dogs extends Main {
         }
 
         $upload_data = $this->uploader->upload($_FILES);
-
+        $redirect = $this->input->post('redirect');
         if (!isset($upload_data['error'])) {
 
             unlink('./uploads/' . $this->image->get_info_parent_type($category_id, 'category')->path);
@@ -280,7 +286,13 @@ class Dogs extends Main {
                     'height' => $upload['image_height']
                 );
                 $this->image->save($image);
-                redirect(site_url('dogs/edit/' . $category_id));
+                if ($redirect) {
+                    redirect($redirect);
+                } else {
+
+
+                    redirect(site_url('dogs/edit/' . $category_id));
+                }
             }
         } else {
             $data['error'] = $upload_data['error'];

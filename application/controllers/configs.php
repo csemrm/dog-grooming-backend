@@ -206,7 +206,7 @@ class Configs extends Main {
         if (!$this->session->userdata('is_shop_admin')) {
             $this->check_access('edit');
         }
-
+        $type = $this->input->post('imgtype');
         $upload_data = $this->uploader->upload($_FILES);
 
         if (!isset($upload_data['error'])) {
@@ -218,7 +218,7 @@ class Configs extends Main {
             foreach ($upload_data as $upload) {
                 $image = array(
                     'parent_id' => $branding_id,
-                    'type' => 'branding',
+                    'type' => $type,
                     'description' => "",
                     'path' => $upload['file_name'],
                     'width' => $upload['image_width'],

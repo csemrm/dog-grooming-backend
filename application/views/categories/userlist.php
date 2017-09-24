@@ -23,6 +23,8 @@ $this->lang->load('ps', 'english');
                     <th>Gender</th>
                     <th>Weight</th>
                     <th>Bread</th>
+                    <th><?php echo $this->lang->line('edit_label') ?></th>
+                    <th>Set App.</th>
                 </tr>
                 <?php
                 $count = 0;
@@ -32,7 +34,7 @@ $this->lang->load('ps', 'english');
                         <tr>
                             <td>
                                 <?php
-                                $images = $category->images;
+                                $images = $this->image->get_all_by_type($category->id, "category")->result();
                                 if (count($images) > 0):
                                     $i = 0;
                                     foreach ($images as $img) {
@@ -42,10 +44,6 @@ $this->lang->load('ps', 'english');
                                         '</div></div>';
                                         $i++;
                                     }
-                                    ?>
-
-
-                                    <?php
                                 endif;
                                 ?> 
                             </td>
@@ -55,7 +53,8 @@ $this->lang->load('ps', 'english');
                             <td><?php echo $category->gender; ?></td>
                             <td><?php echo $category->weight; ?></td>
                             <td><?php echo $category->bread; ?></td>
-
+                            <td><a href="<?php echo site_url("appusers/petedit/" . $category->id); ?>" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a></td>
+                            <td><a href="<?php echo site_url("appusers/petappointment/" . $category->id); ?>" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="new">New</a></td>
 
                         </tr>
                         <?php

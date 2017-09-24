@@ -72,7 +72,7 @@ class Reservations extends Main {
             $this->check_access('add');
         }
         if ($this->input->server('REQUEST_METHOD') == 'POST') {
-
+            $redirect = $this->input->post('redirect');
             if ($this->input->post('user_id') && $this->input->post('note')) {
                 $appuser = $this->appuser->get_info($this->input->post('user_id'));
                 $date = $this->input->post('resv_date');
@@ -99,9 +99,17 @@ class Reservations extends Main {
                 } else {
                     $this->session->set_flashdata('error', 'Database error occured.Please contact your system administrator.');
                 }
-                redirect(site_url('reservations'));
+                if ($redirect) {
+                    redirect($redirect);
+                } else {
+                    redirect(site_url('reservations'));
+                }
             } else {
-                redirect(site_url('reservations'));
+                if ($redirect) {
+                    redirect($redirect);
+                } else {
+                    redirect(site_url('reservations'));
+                }
             }
         }
 
@@ -109,8 +117,7 @@ class Reservations extends Main {
         $this->load_template($content);
     }
 
-    function edit($reservation_id) {
-
+    function edit($reservation_id, $redirect = null) {
         if (!$this->session->userdata('is_shop_admin')) {
             $this->check_access('edit');
         }
@@ -131,9 +138,17 @@ class Reservations extends Main {
                 } else {
                     $this->session->set_flashdata('error', 'Database error occured.Please contact your system administrator.');
                 }
-                redirect(site_url('reservations'));
+                if ($redirect) {
+                    redirect(site_url('appusers/detail/' . $this->input->post('resv_user_id_hidden')));
+                } else {
+                    redirect(site_url('reservations'));
+                }
             } else {
-                redirect(site_url('reservations'));
+                if ($redirect) {
+                    redirect(site_url('appusers/detail/' . $this->input->post('resv_user_id_hidden')));
+                } else {
+                    redirect(site_url('reservations'));
+                }
             }
         }
 
@@ -142,6 +157,7 @@ class Reservations extends Main {
         $reservation->promo = $this->feed->get_info($reservation->promo_id);
         $reservation->user = $this->user->get_info($reservation->user_id);
         $data['reservation'] = $reservation;
+        $data['redirect'] = $redirect;
         $content['content'] = $this->load->view('reservations/edit', $data, true);
         $this->load_template($content);
     }

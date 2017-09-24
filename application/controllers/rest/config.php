@@ -12,6 +12,8 @@ class Config extends REST_Controller
 		if ($id) {
 			$cat = $this->branding->get_info($id); 
                         $cat->images = $this->image->get_all_by_type($id, 'branding')->result();
+                        $cat->dogimages = $this->image->get_all_by_type($id, 'brandingdog')->result();
+                        $cat->catimages = $this->image->get_all_by_type($id, 'brandingcat')->result();
 			$data = $cat;
 		}  
 		

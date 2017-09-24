@@ -62,111 +62,79 @@ $this->lang->load('ps', 'english');
                                     ?>
                                 </ul>
                             </div>
+                        </div> 
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                <?php echo $this->lang->line('feed_list_label') ?>
+                            </label>
+                            <div class="col-lg-9"> 
+                                <select class="form-control" name='promo_id' id='promo_id'>
+                                    <option value='' ><?php echo $this->lang->line('feed_list_label') ?></option>
+                                    <?php
+                                    foreach ($this->feed->get_all($this->shop->get_current_shop()->id)->result() as $feed)
+                                        echo "<option value='" . $feed->id . "'>" . $feed->title . "</option>";
+                                    ?>
+                                </select>
+                            </div>
+                        </div> 
+
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Email Address
+                            </label>
+                            <div class="col-lg-9"> 
+                                <input class="form-control m-input" type="text" placeholder="Email" name='user_email' id='user_email'>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Phone number
+                            </label>
+                            <div class="col-lg-9"> 
+                                <input class="form-control m-input" type="text" placeholder="Phone number" name='user_phone_no' id='user_phone_no'>
+                            </div>
                         </div>
                         <div class="form-group m-form__group row">
                             <label class="col-lg-3 col-form-label">
-                                <?php echo $this->lang->line('cat_label') ?>
+                                <?php echo $this->lang->line('resv_date_label') ?>
+                            </label>
+                            <div class="col-lg-9">
+                                <div class='input-group date' id='m_datepicker_1_validate'>
+                                    <input class="form-control m-input" type="date" readonly placeholder="MM/DD/YYYY" name='resv_date' id='resv_date'>
+                                    <span class="input-group-addon">
+                                        <i class="la la-calendar-check-o"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                <?php echo $this->lang->line('resv_time_label') ?>
                             </label>
                             <div class="col-lg-9"> 
-                                <select class="form-control" name="dog_id" id="dog_id">
-                                    <option value=""><?php echo $this->lang->line('select_cat_message') ?></option>
-                                    <?php
-                                    $categories = $this->category->get_all($this->shop->get_current_shop()->id);
-                                    foreach ($categories->result() as $cat)
-                                        echo "<option value='" . $cat->id . "'>" . $cat->name . "</option>";
-                                    ?>
-                                </select>
-                                <span class="m-form__help">
-                                    <?php echo $this->lang->line('cat_tooltips') ?>
-                                </span>
+                                <input class="form-control m-input" type="time" placeholder="HH:MM" name='resv_time' id='m_timepicker_1' >
+
                             </div>
                         </div> 
                     </div>
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">
-                            <?php echo $this->lang->line('reserved_by') ?>
-                        </label>
-                        <div class="col-lg-9"> 
-                            <select class="form-control" name='user_id' id='user_id'>
-                                <?php
-                                foreach ($this->appuser->get_all()->result() as $appuser)
-                                    echo "<option value='" . $appuser->id . "'>" . $appuser->username . "</option>";
-                                ?>
-                            </select>
-                        </div>
-                    </div> 
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions m-form__actions">
+                            <div class="row">
 
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-6">
+                                    <input type="hidden"  name="dog_id" id="dog_id" value="<?php echo $category->id ?>"/> 
+                                    <input type="hidden"  name="user_id" id="user_id" value="<?php echo $category->appuser_id ?>"/> 
+                                    <input type="hidden"  name="redirect" id="redirect" value="<?php echo site_url('appusers/detail/' . $category->appuser_id); ?>"/> 
+                                    <input type="submit" name="save" value="<?php echo $this->lang->line('save_button') ?>" class="btn btn-primary"/>
+                                    <a href="<?php echo site_url('appusers/detail/' . $category->appuser_id); ?>" class="btn btn-secondary"><?php echo $this->lang->line('cancel_button') ?></a>
 
-
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">
-                            <?php echo $this->lang->line('feed_list_label') ?>
-                        </label>
-                        <div class="col-lg-9"> 
-                            <select class="form-control" name='promo_id' id='promo_id'>
-                                <option value='' ><?php echo $this->lang->line('feed_list_label') ?></option>
-                                <?php
-                                foreach ($this->feed->get_all($this->shop->get_current_shop()->id)->result() as $feed)
-                                    echo "<option value='" . $feed->id . "'>" . $feed->title . "</option>";
-                                ?>
-                            </select>
-                        </div>
-                    </div> 
-
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">
-                            Email Address
-                        </label>
-                        <div class="col-lg-9"> 
-                            <input class="form-control m-input" type="text" placeholder="Email" name='user_email' id='user_email'>
-                        </div>
-                    </div>
-
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">
-                            Phone number
-                        </label>
-                        <div class="col-lg-9"> 
-                            <input class="form-control m-input" type="text" placeholder="Phone number" name='user_phone_no' id='user_phone_no'>
-                        </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">
-                            <?php echo $this->lang->line('resv_date_label') ?>
-                        </label>
-                        <div class="col-lg-9">
-                            <div class='input-group date' id='m_datepicker_1_validate'>
-                                <input class="form-control m-input" type="date" readonly placeholder="MM/DD/YYYY" name='resv_date' id='resv_date'>
-                                <span class="input-group-addon">
-                                    <i class="la la-calendar-check-o"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">
-                            <?php echo $this->lang->line('resv_time_label') ?>
-                        </label>
-                        <div class="col-lg-9"> 
-                            <input class="form-control m-input" type="time" placeholder="HH:MM" name='resv_time' id='m_timepicker_1' >
-
-                        </div>
-                    </div> 
-                </div>
-                <div class="m-portlet__foot m-portlet__foot--fit">
-                    <div class="m-form__actions m-form__actions">
-                        <div class="row">
-
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-6">
-                                <input type="submit" name="save" value="<?php echo $this->lang->line('save_button') ?>" class="btn btn-primary"/>
-                                <a href="<?php echo site_url('reservations'); ?>" class="btn btn-secondary"><?php echo $this->lang->line('cancel_button') ?></a>
-
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <?php echo form_close(); ?>
                 <!--end::Form-->
             </div>

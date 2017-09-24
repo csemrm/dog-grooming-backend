@@ -119,7 +119,7 @@ $this->lang->load('ps', 'english');
                         </div>
                         <div class="form-group m-form__group row">
                             <label class="col-lg-3 col-form-label">
-                                Photo Upload 
+                                Logo Upload 
                             </label>  
                             <div class="col-lg-9">
                                 <a class="btn btn-primary btn-upload pull-right" data-toggle="modal" data-target="#uploadImage">Replace Photo</a>
@@ -156,6 +156,88 @@ $this->lang->load('ps', 'english');
                             </div>
 
                         </div>
+                        
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Cat Upload 
+                            </label>  
+                            <div class="col-lg-9">
+                                <a class="btn btn-primary btn-upload pull-right" data-toggle="modal" data-target="#uploadCatImage">Replace Photo</a>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+
+                            </label>
+                            <div class="col-lg-9">
+                                <?php
+                                $images = $this->image->get_all_by_type($branding->id, 'brandingcat')->result();
+                                if (count($images) > 0):
+                                    ?>
+
+                                    <?php
+                                    $i = 0;
+                                    foreach ($images as $img) {
+
+
+                                        echo '<div class="col-md-4" style="height:100">'
+                                        . '<div class="thumbnail">' .
+                                        '<img src="' . base_url('uploads/thumbnail/' . $img->path) . '">' .
+                                        '</div>'
+                                        . '</div>';
+                                        $i++;
+                                    }
+                                    ?>
+
+
+                                    <?php
+                                endif;
+                                ?> 
+                            </div>
+
+                        </div>
+                        
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Dog Upload 
+                            </label>  
+                            <div class="col-lg-9">
+                                <a class="btn btn-primary btn-upload pull-right" data-toggle="modal" data-target="#uploadDogImage">Replace Photo</a>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+
+                            </label>
+                            <div class="col-lg-9">
+                                <?php
+                                $images = $this->image->get_all_by_type($branding->id, 'brandingdog')->result();
+                                if (count($images) > 0):
+                                    ?>
+
+                                    <?php
+                                    $i = 0;
+                                    foreach ($images as $img) {
+
+
+                                        echo '<div class="col-md-4" style="height:100">'
+                                        . '<div class="thumbnail">' .
+                                        '<img src="' . base_url('uploads/thumbnail/' . $img->path) . '">' .
+                                        '</div>'
+                                        . '</div>';
+                                        $i++;
+                                    }
+                                    ?>
+
+
+                                    <?php
+                                endif;
+                                ?> 
+                            </div>
+
+                        </div>
+                        
+                        
                     </div>
                     <div class="m-form__seperator m-form__seperator--dashed"></div>
                     <div class="m-form__section">
@@ -362,6 +444,7 @@ $this->lang->load('ps', 'english');
                 <div class="form-group">
                     <label><?php echo $this->lang->line('upload_photo_label') ?></label>
                     <input type="file" name="images1">
+                    <input type="hidden" name="imgtype" value="branding">
                 </div>
             </div>
             <div class="modal-footer">
@@ -372,6 +455,66 @@ $this->lang->load('ps', 'english');
         </div>
     </div>
 </div>
+
+<div class="modal fade"  id="uploadCatImage">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title"><?php echo $this->lang->line('replace_photo_button') ?></h4>
+            </div>
+            <?php
+            $attributes = array('id' => 'upload-form', 'enctype' => 'multipart/form-data');
+            echo form_open(site_url("configs/upload/" . $branding->id), $attributes);
+            ?>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label><?php echo $this->lang->line('upload_photo_label') ?></label>
+                    <input type="file" name="images1">
+                    <input type="hidden" name="imgtype" value="brandingcat">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Upload" class="btn btn-primary"/>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"><?php echo $this->lang->line('cancel_button') ?></a>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade"  id="uploadDogImage">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title"><?php echo $this->lang->line('replace_photo_button') ?></h4>
+            </div>
+            <?php
+            $attributes = array('id' => 'upload-form', 'enctype' => 'multipart/form-data');
+            echo form_open(site_url("configs/upload/" . $branding->id), $attributes);
+            ?>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label><?php echo $this->lang->line('upload_photo_label') ?></label>
+                    <input type="file" name="images1">
+                    <input type="hidden" name="imgtype" value="brandingdog">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Upload" class="btn btn-primary"/>
+                <a type="button" class="btn btn-primary" data-dismiss="modal"><?php echo $this->lang->line('cancel_button') ?></a>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade"  id="myModal">
     <div class="modal-dialog">

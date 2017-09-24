@@ -37,7 +37,7 @@ $this->lang->load('ps', 'english');
                 <!--begin::Form-->
                 <?php
                 $attributes = array('id' => 'reserve-form', "class" => "m-form m-form--label-align-right", 'enctype' => 'multipart/form-data');
-                echo form_open(site_url('reservations/edit/' . $reservation->id), $attributes);
+                echo form_open(site_url('reservations/edit/' . $reservation->id.'/'.$redirect), $attributes);
                 ?>
                 <div class="m-portlet__body">
                     <div class="m-form__section m-form__section--first">
@@ -98,7 +98,7 @@ $this->lang->load('ps', 'english');
                                 <?php echo $this->lang->line('resv_date_label') ?>
                             </label>
                             <div class="col-lg-9">  <label class="col-lg-3 col-form-label">
-                                    <?php echo $reservation->resv_date; ?>
+                                    <?php echo english_date_verbose( $reservation->resv_date); ?>
                                 </label>
                             </div>
                         </div> 

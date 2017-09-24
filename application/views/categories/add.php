@@ -66,12 +66,62 @@ $this->lang->load('ps', 'english');
                             </label>
                             <div class="col-lg-9"> 
                                 <input class="form-control" type="text" name="name" placeholder="Name" id="name" />
-                                <span class="m-form__help">
-                                    <?php echo $this->lang->line('cat_name_tooltips') ?>
-                                </span>
                             </div>
                         </div> 
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Type
+                            </label>
+                            <div class="col-lg-9"> 
+                                <div class="m-radio-list">
+                                    <label class="m-radio"> 
+                                        <input type="radio" name="type" value="Dog" >
+                                        Dog 
+                                        <span></span>
+                                    </label>
+                                    <label class="m-radio">
+                                        <input type="radio" name="type"  value="Cat">
+                                        Cat
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Sex
+                            </label>
+                            <div class="col-lg-9"> 
+                                <div class="m-radio-list">
+                                    <label class="m-radio"> 
+                                        <input type="radio" name="gender" value="Male" >
+                                        Male 
+                                        <span></span>
+                                    </label>
+                                    <label class="m-radio">
+                                        <input type="radio" name="gender"  value="Female">
+                                        Female
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">
+                                Weight
+                            </label>
+                            <div class="col-lg-9"> 
+                                <input class="form-control" type="text" name="weight" placeholder="Weight" id="weight" />
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-lg-3 col-form-label">Bread
+                            </label>
+                            <div class="col-lg-9"> 
+                                <input class="form-control" type="text" name="bread" placeholder="bread" id="bread" />
 
+                            </div>
+                        </div>
                         <div class="form-group m-form__group row">
                             <label class="col-lg-3 col-form-label">
                                 <?php echo $this->lang->line('cat_photo_label') ?>
@@ -119,14 +169,12 @@ $this->lang->load('ps', 'english');
                 name: {
                     required: true,
                     minlength: 3,
-                    remote: '<?php echo site_url("dogs/exists")?>'
                 }
             },
             messages: {
                 name: {
                     required: "Please fill pet name.",
-                    minlength: "The length of pet name must be greater than 4",
-                    remote: "Pet name is already existed in the system."
+                    minlength: "The length of pet name must be greater than 3",
                 }
             }
         });
