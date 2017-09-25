@@ -39,22 +39,22 @@ class Devices extends REST_Controller {
     }
 
     function send_get() {
-        $data = null;
-        $appuser_id = $this->get('appuser_id');
+        $data = [];
+        echo $appuser_id = $this->get('appuser_id');
         $DeviceTypeId = $this->get('DeviceTypeId');
 
         if ($appuser_id && $DeviceTypeId) {
-
             $devicescount = $this->user_device->count_all_by($appuser_id, $DeviceTypeId);
             if ($devicescount) {
                 $devices = $this->user_device->get_all_by($appuser_id, $DeviceTypeId)->result();
-            }
-            foreach ($devices as $key => $device) {
-                print_r($this->PushNotifications->android(array('mtitle' => 'Woodlesapp', 'mdesc' => 'THis is test message'), $device->DeviceToken));
+
+                foreach ($devices as $key => $device) {
+                    $data[$key] = ($this->PushNotifications->android(array('mtitle' => 'Woodlesapp', 'mdesc' => 'THis is test message'), $device->DeviceToken));
+                }
+
+                $this->response(array('notifications' => $data, 'success' => true));
             }
         }
-
-        $this->response(array('dogs' => $data, 'success' => true));
     }
 
 }
