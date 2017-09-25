@@ -17,10 +17,12 @@ class PushNotifications {
 	
         // Sends Push notification for Android users
 	public function android($data, $reg_id) {
-	        $url = 'https://android.googleapis.com/gcm/send';
+	        $url = 'https://fcm.googleapis.com/fcm/send';
 	        $message = array(
 	            'title' => $data['mtitle'],
-	            'message' => $data['mdesc'],
+                    'payload'=>$data['mtitle'],
+                    'message' => $data['mdesc'],
+	            'body' => $data['mdesc'],
 	            'subtitle' => '',
 	            'tickerText' => '',
 	            'msgcnt' => 1,

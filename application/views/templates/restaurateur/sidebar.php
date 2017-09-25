@@ -18,11 +18,7 @@
                             <span class="m-menu__link-text">
                                 Dashboard
                             </span>
-                            <span class="m-menu__link-badge">
-                                <span class="m-badge m-badge--danger">
-                                    2
-                                </span>
-                            </span>
+                            
                         </span>
                     </span>
                 </a>
@@ -67,6 +63,8 @@
             }
             ?>
         </ul>
+        
+        
     </div>
     <!-- END: Aside Menu -->
 </div>

@@ -40,7 +40,7 @@ class Devices extends REST_Controller {
 
     function send_get() {
         $data = [];
-        echo $appuser_id = $this->get('appuser_id');
+        $appuser_id = $this->get('appuser_id');
         $DeviceTypeId = $this->get('DeviceTypeId');
 
         if ($appuser_id && $DeviceTypeId) {
@@ -49,11 +49,11 @@ class Devices extends REST_Controller {
                 $devices = $this->user_device->get_all_by($appuser_id, $DeviceTypeId)->result();
 
                 foreach ($devices as $key => $device) {
-                    $data[$key] = ($this->PushNotifications->android(array('mtitle' => 'Woodlesapp', 'mdesc' => 'THis is test message'), $device->DeviceToken));
+                    $data[$key] = ($this->pushnotifications->android(array('mtitle' => 'Woodlesapp', 'mdesc' => 'THis is test message'), $device->DeviceToken));
                 }
 
                 $this->response(array('notifications' => $data, 'success' => true));
-            }
+    }
         }
     }
 
