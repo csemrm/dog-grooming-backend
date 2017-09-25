@@ -12,7 +12,7 @@ class PushNotifications {
 	// Change the above three vriables as per your app.
 
 	public function __construct() {
-		exit('Init function is not allowed');
+		//exit('Init function is not allowed');
 	}
 	
         // Sends Push notification for Android users

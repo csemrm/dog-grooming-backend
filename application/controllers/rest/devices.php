@@ -4,8 +4,6 @@ require_once(APPPATH . '/libraries/REST_Controller.php');
 
 class Devices extends REST_Controller {
 
-   
-
     function add_post() {
 
         $data = $this->post();
@@ -38,6 +36,25 @@ class Devices extends REST_Controller {
 
             $this->response(array('error' => false, 'user' => $user_data));
         }
+    }
+
+    function send_get() {
+        $data = null;
+        $appuser_id = $this->get('appuser_id');
+        $DeviceTypeId = $this->get('DeviceTypeId');
+
+        if ($appuser_id && $DeviceTypeId) {
+
+            $devicescount = $this->user_device->count_all_by($appuser_id, $DeviceTypeId);
+            if ($devicescount) {
+                $devices = $this->user_device->get_all_by($appuser_id, $DeviceTypeId)->result();
+            }
+            foreach ($devices as $key => $device) {
+                print_r($this->PushNotifications->android(array('mtitle' => 'Woodlesapp', 'mdesc' => 'THis is test message'), $device->DeviceToken));
+            }
+        }
+
+        $this->response(array('dogs' => $data, 'success' => true));
     }
 
 }
