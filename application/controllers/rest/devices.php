@@ -69,7 +69,7 @@ class Devices extends REST_Controller {
                 }
 
                 $this->response(array('notifications' => $data, 'success' => true));
-            }
+    }
         }
     }
 
