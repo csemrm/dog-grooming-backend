@@ -132,6 +132,7 @@ class Feeds extends Main {
     function sendpush($feed_id = 0) {
 
         $feed = $this->feed->get_info($feed_id);
+        $feed->images = $this->image->get_all_by_type($feed->id, 'feed')->result();
         $devicescount = $this->user_device->count_all_by();
         if ($devicescount) {
             $devices = $this->user_device->get_all_by()->result();

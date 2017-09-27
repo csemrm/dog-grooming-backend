@@ -167,6 +167,7 @@ class Reservations extends Main {
 
         $reservation = $this->reservation->get_info($reservation_id);
         $reservation->dog = $this->category->get_info($reservation->dog_id);
+        $reservation->images = $this->image->get_all_by_type($reservation->dog_id, "category")->result();
         $push = array(
             'title' => 'Woodlesapp',
             'payload' => $reservation->dog->name . ' is ready for pickup! \n "I has a parfect day !"',
@@ -182,7 +183,8 @@ class Reservations extends Main {
                 'reservation' => $reservation
             )
         );
-        $devicescount = $this->user_device->count_all_by($reservation->user_id);
+        print_r($push);
+        echo $devicescount = $this->user_device->count_all_by($reservation->user_id);
         if ($devicescount) {
             $devices = $this->user_device->get_all_by($reservation->user_id)->result();
 
@@ -194,7 +196,7 @@ class Reservations extends Main {
                 }
             }
 
-            return array(array('notifications' => $data, 'success' => true));
+            print_r(array(array('notifications' => $data, 'success' => true)));
         }
     }
 
