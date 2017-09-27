@@ -25,7 +25,7 @@ class Reservations extends Main {
         foreach ($reservations as $reservation) {
             $reservation->dog = $this->category->get_info($reservation->dog_id);
             $reservation->promo = $this->feed->get_info($reservation->promo_id);
-            $reservation->user = $this->user->get_info($reservation->user_id);
+            $reservation->user = $this->appuser->get_info($reservation->user_id);
             $reservation->reservation_status = $this->reservation_status->get_info($reservation->status_id);
         }
         $data['reservations'] = $reservations;
@@ -156,7 +156,7 @@ class Reservations extends Main {
         $reservation = $this->reservation->get_info($reservation_id);
         $reservation->dog = $this->category->get_info($reservation->dog_id);
         $reservation->promo = $this->feed->get_info($reservation->promo_id);
-        $reservation->user = $this->user->get_info($reservation->user_id);
+        $reservation->user = $this->appuser->get_info($reservation->user_id);
         $data['reservation'] = $reservation;
         $data['redirect'] = $redirect;
         $content['content'] = $this->load->view('reservations/edit', $data, true);
@@ -167,18 +167,30 @@ class Reservations extends Main {
 
         $reservation = $this->reservation->get_info($reservation_id);
         $reservation->dog = $this->category->get_info($reservation->dog_id);
-        $reservation->promo = $this->feed->get_info($reservation->promo_id);
-        $reservation->user = $this->user->get_info($reservation->user_id);
-        $push = array('mtitle' => 'Woodlesapp', 'mdesc' => 'THis is test message');
+        $push = array(
+            'title' => 'Woodlesapp',
+            'payload' => $reservation->dog->name . ' is ready for pickup! \n "I has a parfect day !"',
+            'message' => $reservation->dog->name . ' is ready for pickup! \n "I has a parfect day !"',
+            'body' => $reservation->dog->name . ' is ready for pickup! \n "I has a parfect day !"',
+            'subtitle' => '',
+            'tickerText' => '',
+            'msgcnt' => 1,
+            'vibrate' => 1,
+            'extradata' => array(
+                'id' => $reservation_id,
+                'type' => 'dog',
+                'reservation' => $reservation
+            )
+        );
         $devicescount = $this->user_device->count_all_by($reservation->user_id);
         if ($devicescount) {
             $devices = $this->user_device->get_all_by($reservation->user_id)->result();
 
             foreach ($devices as $key => $device) {
                 if ($device->DeviceTypeId === 'Android') {
-                    $data[$key] = ($this->PushNotifications->android($push, $device->DeviceToken));
+                    $data[$key] = ($this->pushnotifications->android($push, $device->DeviceToken));
                 } else if ($device->DeviceTypeId === 'IOS') {
-                    $data[$key] = ($this->PushNotifications->android($push, $device->DeviceToken));
+                    $data[$key] = ($this->pushnotifications->iOS($push, $device->DeviceToken));
                 }
             }
 

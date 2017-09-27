@@ -42,7 +42,20 @@ class Devices extends REST_Controller {
         $data = [];
         $appuser_id = $this->get('appuser_id');
         $DeviceTypeId = $this->get('DeviceTypeId');
-        $push = array('mtitle' => 'Woodlesapp', 'mdesc' => 'THis is test message');
+        $push = array(
+            'title' => 'Woodlesapp',
+            'payload' => 'THis is test message',
+            'message' => 'THis is test message',
+            'body' => 'THis is test message',
+            'subtitle' => '',
+            'tickerText' => '',
+            'msgcnt' => 1,
+            'vibrate' => 1,
+            'extradata' => array(
+                'id' => 'Woodlesapp',
+                'type' => 'promo',
+            )
+        );
 
         if ($appuser_id && $DeviceTypeId) {
             $devicescount = $this->user_device->count_all_by($appuser_id, $DeviceTypeId);
@@ -50,7 +63,11 @@ class Devices extends REST_Controller {
                 $devices = $this->user_device->get_all_by($appuser_id, $DeviceTypeId)->result();
 
                 foreach ($devices as $key => $device) {
-                    $data[$key] = ($this->PushNotifications->android($push, $device->DeviceToken));
+                    if ($device->DeviceTypeId === 'Android') {
+                        $data[$key] = ($this->pushnotifications->android($push, $device->DeviceToken));
+                    } else if ($device->DeviceTypeId === 'IOS') {
+                        $data[$key] = ($this->pushnotifications->iOS($push, $device->DeviceToken));
+                    }
                 }
 
                 $this->response(array('notifications' => $data, 'success' => true));
@@ -61,15 +78,15 @@ class Devices extends REST_Controller {
                 $devices = $this->user_device->get_all_by($appuser_id)->result();
 
                 foreach ($devices as $key => $device) {
-                    if($device->DeviceTypeId ==='Android'){
-                    $data[$key] = ($this->PushNotifications->android($push, $device->DeviceToken));
-                    }else  if($device->DeviceTypeId ==='IOS'){
-                        $data[$key] = ($this->PushNotifications->android($push, $device->DeviceToken));
+                    if ($device->DeviceTypeId === 'Android') {
+                        $data[$key] = ($this->pushnotifications->android($push, $device->DeviceToken));
+                    } else if ($device->DeviceTypeId === 'IOS') {
+                        $data[$key] = ($this->pushnotifications->iOS($push, $device->DeviceToken));
                     }
                 }
 
                 $this->response(array('notifications' => $data, 'success' => true));
-    }
+            }
         }
     }
 

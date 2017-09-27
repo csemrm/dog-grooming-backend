@@ -72,6 +72,7 @@
                         <th><?php echo $this->lang->line('feed_title_label') ?></th>
                         <th><?php echo $this->lang->line('description_label') ?></th>
                         <th>Status</th> 
+                        <th>Send Push</th> 
                         <th><?php echo $this->lang->line('edit_label') ?>  </th> <th><?php echo $this->lang->line('delete_label') ?></th> 
                     </tr>
                     <?php
@@ -99,7 +100,8 @@
 
                                     <?php endif; ?>
                                 </td>
-
+<td><a href="<?php echo site_url("feeds/sendpush/" . $feed->id); ?>" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Send Push">Send</a> 
+                                </td>
                                 <td><a href="<?php echo site_url("feeds/edit/" . $feed->id); ?>" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details"><i class="la la-edit"></i></a> 
                                 </td>
 
