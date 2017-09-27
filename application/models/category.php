@@ -53,7 +53,7 @@ class Category extends Base_Model {
             $this->db->offset($offset);
         }
 
-        $this->db->order_by('ordering', 'asc');
+        $this->db->order_by('id', 'desc');
         return $this->db->get();
     }
 
@@ -70,7 +70,7 @@ class Category extends Base_Model {
             $this->db->offset($offset);
         }
 
-        $this->db->order_by('ordering', 'asc');
+        $this->db->order_by('id', 'desc');
         return $this->db->get();
     }
 

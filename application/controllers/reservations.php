@@ -183,8 +183,7 @@ class Reservations extends Main {
                 'reservation' => $reservation
             )
         );
-        print_r($push);
-        echo $devicescount = $this->user_device->count_all_by($reservation->user_id);
+        $devicescount = $this->user_device->count_all_by($reservation->user_id);
         if ($devicescount) {
             $devices = $this->user_device->get_all_by($reservation->user_id)->result();
 
@@ -196,7 +195,7 @@ class Reservations extends Main {
                 }
             }
 
-            print_r(array(array('notifications' => $data, 'success' => true)));
+            return array('notifications' => $data, 'success' => true);
         }
     }
 
