@@ -75,17 +75,21 @@ class User_Device extends Base_Model {
         return $this->db->count_all_results();
     }
 
-    function count_all_by($UserId, $DeviceTypeId) {
+    function count_all_by($UserId = null, $DeviceTypeId = null) {
         $this->db->from($this->table_name);
-        $this->db->where('DeviceTypeId', $DeviceTypeId);
-        $this->db->where('UserId', $UserId);
+        if ($DeviceTypeId)
+            $this->db->where('DeviceTypeId', $DeviceTypeId);
+        if ($UserId)
+            $this->db->where('UserId', $UserId);
         return $this->db->count_all_results();
     }
 
-    function get_all_by($UserId, $DeviceTypeId, $limit = false, $offset = false) {
+    function get_all_by($UserId = null, $DeviceTypeId = null, $limit = false, $offset = false) {
         $this->db->from($this->table_name);
-        $this->db->where('DeviceTypeId', $DeviceTypeId);
-        $this->db->where('UserId', $UserId);
+        if ($DeviceTypeId)
+            $this->db->where('DeviceTypeId', $DeviceTypeId);
+        if ($UserId)
+            $this->db->where('UserId', $UserId);
         if ($limit) {
             $this->db->limit($limit);
         }

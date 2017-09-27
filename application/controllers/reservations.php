@@ -132,8 +132,9 @@ class Reservations extends Main {
 
                 if ($this->reservation->save($reserve_data, $reservation_id)) {
                     $this->session->set_flashdata('success', 'Reservation is successfully updated.');
-
-                    $this->send_email_to_user(
+                    if ($this->input->post('resv_status') === '4') {
+                        $this->sendpush($reservation_id);
+                    } $this->send_email_to_user(
                             $this->input->post('resv_user_id_hidden'), $this->input->post('resv_user_email_hidden'), $this->input->post('resv_user_name_hidden'), $this->input->post('resv_user_phone_hidden'), $this->input->post('resv_shop_id_hidden'), $this->input->post('resv_id_hidden'), $this->input->post('resv_date_hidden'), $this->input->post('resv_time_hidden'), $this->input->post('resv_note_hidden'), $this->reservation_status->get_info($this->input->post('resv_status'))->title);
                 } else {
                     $this->session->set_flashdata('error', 'Database error occured.Please contact your system administrator.');
@@ -160,6 +161,29 @@ class Reservations extends Main {
         $data['redirect'] = $redirect;
         $content['content'] = $this->load->view('reservations/edit', $data, true);
         $this->load_template($content);
+    }
+
+    function sendpush($reservation_id = 0) {
+
+        $reservation = $this->reservation->get_info($reservation_id);
+        $reservation->dog = $this->category->get_info($reservation->dog_id);
+        $reservation->promo = $this->feed->get_info($reservation->promo_id);
+        $reservation->user = $this->user->get_info($reservation->user_id);
+        $push = array('mtitle' => 'Woodlesapp', 'mdesc' => 'THis is test message');
+        $devicescount = $this->user_device->count_all_by($reservation->user_id);
+        if ($devicescount) {
+            $devices = $this->user_device->get_all_by($reservation->user_id)->result();
+
+            foreach ($devices as $key => $device) {
+                if ($device->DeviceTypeId === 'Android') {
+                    $data[$key] = ($this->PushNotifications->android($push, $device->DeviceToken));
+                } else if ($device->DeviceTypeId === 'IOS') {
+                    $data[$key] = ($this->PushNotifications->android($push, $device->DeviceToken));
+                }
+            }
+
+            return array(array('notifications' => $data, 'success' => true));
+        }
     }
 
     function send_email_to_user($user_id, $user_email, $user_name, $user_phone, $shop_id, $resv_id, $resv_date, $resv_time, $note, $resv_status_title) {

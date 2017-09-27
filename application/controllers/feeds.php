@@ -129,6 +129,27 @@ class Feeds extends Main {
         $this->load_template($content);
     }
 
+    function sendpush($feed_id = 0) {
+
+        $feed = $this->feed->get_info($feed_id);
+        $devicescount = $this->user_device->count_all();
+        if ($devicescount) {
+            $devices = $this->user_device->get_all()->result();
+            $push = array('mtitle' => 'Woodlesapp', 'mdesc' => 'THis is test message');
+            foreach ($devices as $key => $device) {
+                if ($device->DeviceTypeId === 'Android') {
+                    $data[$key] = ($this->PushNotifications->android($push, $device->DeviceToken));
+                } else if ($device->DeviceTypeId === 'IOS') {
+                    $data[$key] = ($this->PushNotifications->iOS($push, $device->DeviceToken));
+                }
+            }
+
+            $this->response(array('notifications' => $data, 'success' => true));
+        }
+
+        redirect(site_url('feeds'));
+    }
+
     function gallery($id) {
         session_start();
         $_SESSION['parent_id'] = $id;
