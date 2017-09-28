@@ -52,8 +52,29 @@ class Reservations extends REST_Controller {
         if ($this->send_email_to_user($data['user_id'], $data['user_email'], $data['user_name'], $data['user_phone_no'], $data['shop_id'], $reservation_data['id'], $data['resv_date'], $data['resv_time'], $data['note'])) {
             $send_user = true;
         }
-        $this->response(array('error' => false,'message'=>'Your appointment is scheduled' ,'reservation' => $reservation_data));
-        
+        $this->response(array('error' => false, 'message' => 'Your appointment is scheduled', 'reservation' => $reservation_data));
+    }
+
+    function update_put() {
+        $send_user = false;
+        $send_shop = false;
+
+        $data = $this->put();
+        if ($data == null) {
+            $this->response(array('error' => array('message' => 'invalid_json')));
+        }
+
+        if (!array_key_exists('id', $data)) {
+            $this->response(array('error' => array('message' => 'require_shop_id')));
+        }
+        $reservation_data = array(
+            'status_id' => 3
+        );
+        if ($this->reservation->save($reservation_data, $data['id'])) {
+            $this->response(array('error' => false, 'message' => 'Your appointment is scheduled', 'reservation' => $reservation_data));
+        } else {
+            $this->response(array('error' => true, 'message' => 'db_error'));
+        }
     }
 
     function send_email_to_user($user_id, $user_email, $user_name, $user_phone, $shop_id, $resv_id, $resv_date, $resv_time, $note) {

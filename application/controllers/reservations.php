@@ -133,8 +133,11 @@ class Reservations extends Main {
                 if ($this->reservation->save($reserve_data, $reservation_id)) {
                     $this->session->set_flashdata('success', 'Reservation is successfully updated.');
                     if ($this->input->post('resv_status') === '4') {
-                        $this->sendpush($reservation_id);
-                    } $this->send_email_to_user(
+                        $this->sendpush($reservation_id, 4);
+                    } elseif ($this->input->post('resv_status') === '3') {
+                        $this->sendpush($reservation_id, 3);
+                    }
+                    $this->send_email_to_user(
                             $this->input->post('resv_user_id_hidden'), $this->input->post('resv_user_email_hidden'), $this->input->post('resv_user_name_hidden'), $this->input->post('resv_user_phone_hidden'), $this->input->post('resv_shop_id_hidden'), $this->input->post('resv_id_hidden'), $this->input->post('resv_date_hidden'), $this->input->post('resv_time_hidden'), $this->input->post('resv_note_hidden'), $this->reservation_status->get_info($this->input->post('resv_status'))->title);
                 } else {
                     $this->session->set_flashdata('error', 'Database error occured.Please contact your system administrator.');
@@ -163,23 +166,34 @@ class Reservations extends Main {
         $this->load_template($content);
     }
 
-    function sendpush($reservation_id = 0) {
+    function sendpush($reservation_id = 0, $type = 4) {
 
         $reservation = $this->reservation->get_info($reservation_id);
         $reservation->dog = $this->category->get_info($reservation->dog_id);
         $reservation->images = $this->image->get_all_by_type($reservation->dog_id, "category")->result();
+        $_type = 'dog';
+        if ($type == 4) {
+            $_type = 'dog';
+            $payload = $reservation->dog->name . ' is ready for pickup! "I has a parfect day !"';
+        } elseif ($type == 3) {
+            $_type = 'app.confirm';
+            $payload = 'An appointment has been confirmed for ' . $reservation->dog->name . '! "I has a parfect day !"';
+        } elseif ($type == 1) {
+            $_type = 'app.pending';
+            $payload = 'An appointment is pending for ' . $reservation->dog->name . '! "I has a parfect day !"';
+        }
         $push = array(
             'title' => 'Woodlesapp',
-            'payload' => $reservation->dog->name . ' is ready for pickup! \n "I has a parfect day !"',
-            'message' => $reservation->dog->name . ' is ready for pickup! \n "I has a parfect day !"',
-            'body' => $reservation->dog->name . ' is ready for pickup! \n "I has a parfect day !"',
+            'payload' => $payload,
+            'message' => $payload,
+            'body' => $payload,
             'subtitle' => '',
             'tickerText' => '',
             'msgcnt' => 1,
             'vibrate' => 1,
             'extradata' => array(
                 'id' => $reservation_id,
-                'type' => 'dog',
+                'type' => $_type,
                 'reservation' => $reservation
             )
         );
