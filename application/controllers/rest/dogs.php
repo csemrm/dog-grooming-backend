@@ -13,6 +13,7 @@ class Dogs extends REST_Controller {
             $cat = $this->category->get_all_by($appuser_id)->result();
             foreach ($cat as $key => $dog) {
                 $cat[$key]->images = $this->image->get_all_by_type($dog->id, "category")->result();
+                $cat[$key]->lastvisit = $this->reservation->get_infoby_petid($dog->id)->resv_date;
             }
 
             $data = $cat;

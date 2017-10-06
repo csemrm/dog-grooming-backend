@@ -132,10 +132,8 @@ class Reservations extends Main {
 
                 if ($this->reservation->save($reserve_data, $reservation_id)) {
                     $this->session->set_flashdata('success', 'Reservation is successfully updated.');
-                    if ($this->input->post('resv_status') === '4') {
-                        $this->sendpush($reservation_id, 4);
-                    } elseif ($this->input->post('resv_status') === '3') {
-                        $this->sendpush($reservation_id, 3);
+                    if ($this->input->post('resv_status') != 2) {
+                        $this->sendpush($reservation_id, $this->input->post('resv_status'));
                     }
                     $this->send_email_to_user(
                             $this->input->post('resv_user_id_hidden'), $this->input->post('resv_user_email_hidden'), $this->input->post('resv_user_name_hidden'), $this->input->post('resv_user_phone_hidden'), $this->input->post('resv_shop_id_hidden'), $this->input->post('resv_id_hidden'), $this->input->post('resv_date_hidden'), $this->input->post('resv_time_hidden'), $this->input->post('resv_note_hidden'), $this->reservation_status->get_info($this->input->post('resv_status'))->title);
@@ -191,6 +189,7 @@ class Reservations extends Main {
             'tickerText' => '',
             'msgcnt' => 1,
             'vibrate' => 1,
+            'notificationId' => 1,
             'extradata' => array(
                 'id' => $reservation_id,
                 'type' => $_type,

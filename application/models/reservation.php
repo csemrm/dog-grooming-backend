@@ -72,6 +72,17 @@ class Reservation extends Base_Model {
         }
     }
 
+    function get_infoby_petid($id) {
+
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get_where($this->table_name, array('dog_id' => $id, 'status_id'=>'4'));
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        } else {
+            return $this->get_empty_object($this->table_name);
+        }
+    }
+
     function delete_by_shop($shop_id) {
         $this->db->where('shop_id', $shop_id);
         return $this->db->delete($this->table_name);

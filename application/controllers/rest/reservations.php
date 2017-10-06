@@ -55,11 +55,11 @@ class Reservations extends REST_Controller {
         $this->response(array('error' => false, 'message' => 'Your appointment is scheduled', 'reservation' => $reservation_data));
     }
 
-    function update_put() {
+    function update_post() {
         $send_user = false;
         $send_shop = false;
 
-        $data = $this->put();
+        $data = $this->post();
         if ($data == null) {
             $this->response(array('error' => array('message' => 'invalid_json')));
         }
